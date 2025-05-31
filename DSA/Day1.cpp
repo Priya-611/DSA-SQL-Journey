@@ -1,5 +1,6 @@
-#include<iostream>
-using namespace std;
+#include<iostream>   //Preprocessor directive for input/output    
+using namespace std;   // to tell the complier that i'll be using standard namespace (container to group related things)
+//standard (std) namespace contains common tools that are mostly used 
 int main(){
     cout<<"HELLO WORLD!!"<<endl;
     cout<<"We are practising dsa using cpp";
@@ -28,7 +29,7 @@ int main(){
 // Typecasting
  
 #include<iostream>
-#include<iomanip> //for setprecision
+#include<iomanip> ////"input-output manipulators", header file needed for formatting  eg: for setprecision
 using namespace std;
 int main(){
     int x;
@@ -202,7 +203,7 @@ int main(){
 
 
 #include<iostream>
-#include<iomanip>
+#include<iomanip>  
 using namespace std;
 int main(){
     int n;
