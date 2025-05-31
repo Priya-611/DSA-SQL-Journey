@@ -111,3 +111,111 @@ int main(){
 
 
 
+
+
+//Array
+
+
+// largest and smallest no. in an array
+
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[]={12,87,45,23,44,77};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int max=arr[0],min=arr[0];
+    for(int i=0;i<n;i++){
+        if(arr[i]>max) max=arr[i];
+        if(arr[i]<min) min=arr[i];
+    }
+    cout<<"Max: "<<max <<" and Min: "<<min<<endl;
+
+    return 0;
+}
+
+
+
+
+//2D array
+
+
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[2][3]={{12,34,56},{98,76,54}};  
+    int arr2[][3]={{12,34,56},{98,76,54}};   //not necessarily imp to mention no. of rows
+    int r=sizeof(arr)/sizeof(arr[0]);   //  = total size / size of one row
+    int c=sizeof(arr[0])/sizeof(arr[0][0]);   //  = size of one row / size of one element
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            cout<<arr[i][j]<<" ";
+        }
+    }
+
+    return 0;
+}
+
+
+
+//Example
+#include<iostream>
+using namespace std;
+int main(){
+    int m,n;
+    cout<<"Enter the size of m and n: ";
+    cin>>m>>n;
+    int arr[m][n];
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            cin>>arr[i][j];
+        }
+    }
+    
+    int sum=0;
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            sum+=arr[i][j];
+        }
+    }
+    cout<<"Sum: "<<sum<<endl;
+
+    return 0;
+}
+
+
+//Pointer (basics)
+// a variable that stores the 'address' of another variable not the actual value
+
+
+#include<iostream>
+using namespace std;
+
+int main(){
+    int a=10;
+    cout<<"Value of a: "<< a <<endl;
+    cout<<"Address of a: "<< &a <<endl;  // & = address-of operator (to store the address)
+
+    // * = dereference operator (to get the value at a pointer's address)
+    int *p;    // p is a pointer variable that can store address an int (it doesn't store an int value) 
+    p = &a;
+    cout<<"Pointer p stores: "<< p <<endl;
+    cout<<"Value at address "<< &a <<" is "<< *p <<endl;
+    return 0;
+}
+
+
+
+
+//String
+
+#include<iostream>
+using namespace std;
+int main(){
+    string s;
+    cout<<"Enter a sentence: ";
+    getline(cin,s);
+    cout<<s<<endl;
+    cout<<s[1]<<endl;
+    return 0;
+}
+
