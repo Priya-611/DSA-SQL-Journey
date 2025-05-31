@@ -27,7 +27,7 @@ int main(){
 //some built-in functions
 
 #include<iostream>
-#include<math.h>
+#include<cmath>
 using namespace std;
 int main(){
 
@@ -48,11 +48,16 @@ int main(){
 
 
 //Functions
-//swapping two numbers using call by reference
+//Pass by value: a copy of variable is passed( only value is passed ,, it doesn't affect the original)
+
+//Pass by reference: Original variable is passed ( address with the value is passed)
+
+
+//swapping two numbers using call by value
 
 // #include<iostream>
 using namespace std;
-void swapValues(int &a, int &b){  //using & i.e. address operator so to make changes in the actual values
+void swapByValue(int a, int b){  //using & i.e. address operator so to make changes in the actual values
     int temp=a;
     a=b;
     b=temp;
@@ -61,7 +66,31 @@ int main(){
     int a,b;
     cout<<"Enter the value of a and b: ";
     cin>>a>>b;
-    swapValues(a,b);
+    swapByValue(a,b);
+    //here no change will be done in main as the values are only swapped in swapByValue function
+    cout<<"The value of a is "<<a<<endl;
+    cout<<"The value of b is "<<b<<endl;
+
+    return 0;
+}
+
+
+
+
+//swapping two numbers using call by reference
+
+// #include<iostream>
+using namespace std;
+void swapByReference(int &a, int &b){  //using & i.e. address operator so to make changes in the actual values
+    int temp=a;
+    a=b;
+    b=temp;
+}
+int main(){
+    int a,b;
+    cout<<"Enter the value of a and b: ";
+    cin>>a>>b;
+    swapByReference(a,b);
     cout<<"The value of a is "<<a<<endl;
     cout<<"The value of b is "<<b<<endl;
 
