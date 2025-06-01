@@ -234,6 +234,91 @@ int main(){
 
 
 
+//call by reference using pointers
+
+#include<iostream>
+using namespace std;
+void addGraceMarks(int *m){
+    if(*m < 40) *m += 5;     // Dereference to access and modify the value
+}
+int main(){
+    int marks;
+    cout<<"Enter marks: ";
+    cin>>marks;
+    //or
+    // int *p = &marks;
+    // addGraceMarks(p);   //passing pointers
+    addGraceMarks(&marks); //passing address-of marks which is of type pointer
+    cout<<"Marks after updation: "<<marks<<endl;
+
+
+    return 0;
+}
+
+
+
+
+// array with pointer
+
+
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[]={7,5,2};
+    int *p = &arr[0]; //points to 7
+    cout<< ++*p <<endl; // add 1 to *p (7)  i.e 1+7 = 8
+
+    int *p1= p+1;  //next location to p i.e. '5'
+    cout<<*p1<<endl;
+
+    cout<< *++p <<endl;   //points to 5   i.e. ++p -> next address after 7 ,,* ->value at that address
+
+        
+    return 0;
+}
+
+
+
+//wild pointer -> pointer only declared but not initialised   int *p;
+
+
+//null pointer ->   pointer assigned NULL value   int *p=NULL;
+
+
+//dangling pointer -> pointer that points to an invalid memory location,, earlier points to a variable but now that variable doesn't exist
+                                                       
+                        // int* get(){
+                        //     int x=100;  //local variable
+                        //     return &x; //returning address of local variable //DANGLING
+                        // }
+
+                        // int main(){
+                        //     int *p=get();
+                        //     cout<<*p<<endl;  //undefined behaviour 
+
+                        //     return 0;
+                        // } 
+                        
+//void(generic) pointer -> special pointer that can point to any datatype value, cannot be dereferenced  ,,  so we typecast
+                        // int main(){
+                        //     int x=10;
+                        //     float f=8.7;
+
+                        //     void *p;
+
+                        //     p=&x;  //p points to x
+                        //     cout<<*(int *)p<<endl;  //dereferencing way 1
+
+                        //     p=&f;  //p points to f
+                        //     float *fp=(float *)p;  //dereferencing way 2
+                        //     cout<<*fp<<endl;  
+
+                        //     return 0;
+                        // }
+
+
+
+
 
 //String
 
