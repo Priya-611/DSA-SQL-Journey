@@ -58,3 +58,113 @@ int main(){
 
 
 
+
+//removing duplicate elements
+
+#include<iostream>
+#include<vector>
+#include<algorithm>  //includes standard algorithms like sorting & searching
+//sort(begin, end) – Sorts the container.
+
+
+using namespace std;
+int main(){
+    int n;
+    cout<<"Enter the size of vector: ";
+    cin>>n;
+    vector<int> v;
+    int ele;
+    cout<<"Enter elements: ";
+    for(int i=0;i<n;i++){
+        cin>>ele;
+        v.push_back(ele);
+    }
+    sort(v.begin(),v.end());
+
+    for(int i=0;i<v.size()-1;){
+        
+        if(v[i]==v[i+1]) v.erase(v.begin()+i);   // don't increment i
+        else i++;    // move to next only if no erase
+
+    }
+
+    cout<<"after removal: "<<endl;
+    for(int ele: v)
+    {
+        cout<<ele<<" ";
+    }
+    return 0;
+}
+
+
+
+//algorithm header contains
+
+// Sorting & Searching:
+// sort(begin, end) – Sorts the container.
+
+// binary_search(begin, end, key) – Checks if an element exists in a sorted container.
+
+// find(begin, end, key) – Finds the first occurrence of a value.
+
+// Modification:
+// reverse(begin, end) – Reverses elements.
+
+// remove(begin, end, val) – Removes all instances of a value (used with erase).
+
+// unique(begin, end) – Removes consecutive duplicates.
+
+// transform() – Applies a function to each element.
+
+// Utility:
+// min() and max() – Get min or max values.
+
+// count(begin, end, val) – Counts how many times a value occurs.
+
+
+
+
+//2D vector
+
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+    int r,c;
+    cout<<"Enter the no.of rows and columns: ";
+    cin>>r>>c;
+    // vector<vector<int>> matrix(rows, vector<int>(cols));
+    /*vector<vector<int>> v (r , vector<int>(c));
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            cin>>v[i][j];
+        }
+    }
+    cout<<"Elements are: ";
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            cout<<v[i][j]<<" ";
+        }
+    }*/
+
+    vector<vector<int>> v;
+    for(int i=0;i<r;i++){
+        vector<int> row;    //create a new row
+        for(int j=0;j<c;j++){
+            int x;
+            cin>>x;
+            row.push_back(x);  //add element to the row
+        }
+        v.push_back(row); //push the row into the vector
+    }
+
+    cout<<"Elements are: ";
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            cout<<v[i][j]<<" ";
+        }
+    }
+
+    
+    return 0;
+}
