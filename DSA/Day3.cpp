@@ -1,3 +1,162 @@
+//Searching
+
+//linear search -> Check each element one by one until you find the target.
+//binary search -> Keep dividing the array in half and check middle elements.(in sorted array)
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int linearSearch(int arr[], int n, int key){
+    for(int i=0;i<n;i++){
+        if(arr[i]==key) return i;
+    }
+    return -1;
+}
+
+int binarySearch(int arr[], int n, int k){
+    int start=0,end=n-1;
+    while(start<=end){
+        int mid= start+ (end-start)/n;
+        
+        if(arr[mid]==k) return mid;
+        else if (k < arr[mid]) end=mid-1;
+        else start=mid+1;
+    }
+    return -1; 
+}
+int main(){
+    int n;
+    cout<<"Enter the size: ";
+    cin>>n;
+    int arr[n];
+    cout<<"Enter elements: ";
+    for(int i=0;i<n;i++) cin>>arr[i];
+
+    //linear searching
+    int key;
+    cout<<"Enter target: ";
+    cin>>key;
+    int idx=linearSearch(arr,n, key);  
+    cout<<key <<" is at index "<<idx<<endl;
+
+    //binary searching
+    sort(arr,arr+n);
+    cout<<"Enter another key: ";
+    int k;
+    cin>>k;
+    int i=binarySearch(arr,n, k);  
+    cout<<k <<" is at index "<<i<<endl;
+
+    return 0;
+}
+
+
+
+
+//Sorting
+
+//bubble sort -> Repeatedly swap adjacent elements if they are in the wrong order.
+//selection sort -> Select the smallest element and put it at the front.
+//insertion sort -> Build sorted part one by one by inserting elements at correct positions.
+//merge sort -> Divide the array, sort both halves, then merge.
+//quick sort -> Choose a pivot, partition array around pivot, recursively sort parts.
+
+
+// bubble-sort
+#include<iostream>
+using namespace std;
+int main(){
+    int n;
+    cout<<"Enter size: ";
+    cin>>n;
+
+    int arr[n];
+
+    for(int i=0;i<n;i++) cin>>arr[i];
+
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n-1-i;j++){
+            if(arr[j]>arr[j+1]){
+                int temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
+            }
+        }
+    }
+    for(int i=0;i<n;i++) cout<<arr[i]<<" ";
+
+
+    return 0;
+}
+
+
+
+
+//selection-sort
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main(){
+    int n;
+    cout<<"Enter size: ";
+    cin>>n;
+
+    int arr[n];
+
+    for(int i=0;i<n;i++) cin>>arr[i];
+
+    for(int i=0;i<n;i++){
+        int small=arr[i]; //considering ith ele to be the smallest
+        int idx=i;
+        for(int j=i+1;j<n;j++){
+            if(arr[j]<small){  //if any smallest ele is found make it as smallest
+                small=arr[j];
+                idx=j;
+            }
+        }
+        swap(arr[idx],arr[i]);
+    }
+    for(int i=0;i<n;i++) cout<<arr[i]<<" ";
+
+
+    return 0;
+}
+
+
+
+
+//insertion sort
+#include<iostream>
+using namespace std;
+int main(){
+    int n;
+    cout<<"Enter size: ";
+    cin>>n;
+
+    int arr[n];
+
+    for(int i=0;i<n;i++) cin>>arr[i];
+
+    for(int i=1;i<n;i++){
+        int temp=arr[i]; //considering i-th ele to be the smallest
+        int j=i-1;
+        while(temp<arr[j] && j>=0){
+            arr[j+1]=arr[j];
+            j--;
+        }
+        arr[j+1]=temp;
+        
+    }
+    for(int i=0;i<n;i++) cout<<arr[i]<<" ";
+
+
+    return 0;
+}
+
+
+
+
+
+
 //Vector
 //dynamic array 
 //can be resized 
