@@ -95,6 +95,85 @@ int main(){
 
 
 
+//replace(pos, len, str)
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string s1;
+    cout<<"Enter the string: ";
+    getline(cin,s1);
+    
+    s1.replace(4,2,"Priya");  //go to 4th position, replace 'two' char with the new 'string'
+    cout<<s1;
+
+    return 0;
+}
+
+
+
+
+// insert(pos, str)
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string s1;
+    cout<<"Enter the string: ";
+    getline(cin,s1);
+    
+    s1.insert(4,"Priya");  //go to 4th position, insert new 'string'
+    cout<<s1;
+
+    return 0;
+}
+
+
+
+//substr(pos, len) 
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string s1;
+    cout<<"Enter the string: ";
+    getline(cin,s1);
+    string sub=s1.substr(4,7);  //go to 4th position and get next 7 letters
+    cout<<sub<<endl;
+
+    return 0;
+}
+
+
+
+
+//compare(str)
+// 0 → equal
+// < 0 → this string is smaller
+// > 0 → this string is greater
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string s1;
+    cout<<"Enter the string: ";
+    getline(cin,s1);
+
+    string s2;
+    cout<<"Enter the string: ";
+    getline(cin,s2);
+
+    int res=(s1.compare(s2));
+    
+    if(res==0) cout<<"Strings are equal"<<endl;
+    else if(res<0) cout<<s1<<" is smaller than "<<s2<<endl;
+    else cout<<s1<<" is smaller than "<<s2<<endl;
+
+    return 0;
+}
+
+
+
 
 //check string is palindrome
 #include<iostream>
@@ -122,8 +201,8 @@ int main(){
 
 
 
-// count vowels and consonents
 
+// count vowels and consonents
 #include<iostream>
 #include<string>
 using namespace std;
@@ -150,7 +229,6 @@ int main(){
 }
 
 //or
-
 #include<iostream>
 #include<string>
 #include<algorithm>                          
@@ -169,6 +247,7 @@ int main(){
     }
     cout<<"Count of vowel : "<<v<<" and consonent: "<<c<<endl;
 }
+
 
 
 
@@ -203,8 +282,8 @@ int main(){
 
 
 
-//anagrams ( have the same frequency of each character.)
 
+//anagrams ( have the same frequency of each character.)
 #include<iostream>
 #include<string>
 #include<algorithm>
@@ -223,3 +302,84 @@ int main(){
 
     return 0;
 }
+
+
+
+
+
+//find character in the string
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string s1;
+    cout<<"Enter the string: ";
+    getline(cin,s1);
+    char c;
+    cout<<"Enter the character: ";
+    cin>>c;
+    int idx=-1;
+    for(int i=0;s1[i]!='\0';i++){
+        if(s1[i]==c){
+            idx=i;
+            break;
+        }
+    }
+    if(idx!=-1) cout<<c<<" is present at index "<<idx<<endl;
+    else cout<<c<<" is not found"<<endl;
+
+    return 0;
+}
+
+//or
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string s1;
+    cout<<"Enter the string: ";
+    getline(cin,s1);
+    char c;
+    cout<<"Enter the character: ";
+    cin>>c;
+    int idx=s1.find(c);
+    int lidx=s1.rfind(c);  //last occurrence of c
+
+    if(lidx!=-1) cout<<"Last index of "<<c<<" "<<lidx<<endl;
+    if(idx!=-1) cout<<c<<" is present at index "<<idx<<endl;
+    else cout<<c<<" is not found"<<endl;
+
+    return 0;
+}
+
+
+
+
+
+
+//remove vowel 
+
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string s1;
+    cout<<"Enter the string: ";
+    getline(cin,s1);
+    string vow= "AEIOUaeiou";
+    for(int i=0;s1[i]!='\0';i++){
+        //if(! notfound) -> means it is found so erase it
+        if(vow.find(s1[i])!= string::npos){  //string::npos means “not found”
+            s1.erase(i,1); //(Pos,length)
+            i--;   //since the char is erased from that pos, so now a new char is present there,, so we'll check that char too
+        }
+        
+    }
+    cout<<"without vowels: "<<s1<<endl;
+
+    return 0;
+}
+
+
+
+
