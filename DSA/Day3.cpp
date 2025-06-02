@@ -155,6 +155,100 @@ int main(){
 
 
 
+//merge sort
+#include<iostream>
+using namespace std;
+void conquer(int arr[], int left, int mid, int right){
+    int i=left;
+    int j=mid+1;
+    int size=right-left+1;  //size of subarray
+    int k=0;
+    int b[size];
+    while(i<=mid && j<=right){
+        if(arr[i]<arr[j]){
+            b[k++]=arr[i++];  //put whichever s the smallest
+        }
+        else{
+            b[k++]=arr[j++];
+        }
+    }
+    if(i<=mid) b[k++]=arr[i++];
+    if(j<=right) b[k++]=arr[j++];
+    
+    for(int a=0;a<size;a++){  //copy merged array in original
+        arr[left+a]=b[a];
+    }
+}
+void divide(int arr[],int left,int right, int size){
+    if(left<right){
+        int mid= left+(right-left)/2;
+        divide(arr,left,mid,size);
+        divide(arr,mid+1,right,size);
+        conquer(arr,left,mid,right);
+    }
+}
+int main(){
+    int n;
+    cout<<"Enter size: ";
+    cin>>n;
+
+    int arr[n];
+
+    for(int i=0;i<n;i++) cin>>arr[i];
+
+    divide(arr,0,n-1,n);
+    for(int i=0;i<n;i++) cout<<arr[i]<<" ";
+
+    return 0;
+}
+
+
+
+
+
+
+
+//quick sort
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int partition(int arr[], int l,int r){
+    int pivot=arr[l]; //choosing left most elemennt as pivot
+    int i=l+1;
+    int j=r;
+    while(i<=j){
+        while(arr[i]<pivot) i++;  //keep moving if arr[i] < pivot
+        while(arr[j]>pivot) j--;  //keep moving if arr[j] > pivot
+        if(i<j) swap(arr[i],arr[j]);  //swap both
+    }
+    swap(arr[j],arr[l]);  //pivot is swapped with arr[j] which is smallest
+    return j;
+}
+void quickSort(int arr[], int l, int r){
+    if(l<r){
+        int idx=partition(arr,l,r);
+        quickSort(arr,l,idx-1);
+        quickSort(arr,idx+1,r);
+    }
+}
+int main(){
+    int n;
+    cout<<"Enter size: ";
+    cin>>n;
+
+    int arr[n];
+
+    for(int i=0;i<n;i++) cin>>arr[i];
+
+    quickSort(arr,0,n-1);
+    for(int i=0;i<n;i++) cout<<arr[i]<<" ";
+
+    return 0;
+}
+
+
+
+
 
 
 //Vector
