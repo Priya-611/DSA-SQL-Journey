@@ -17,6 +17,8 @@ int main(){
 }
 
 
+
+
 //Polymorphism  (many froms)  [the same function name or operator behaves differently in different situations.]
 
 //Compile-time polymorphism -> Early binding / static binding / directly associated an addresss to function call
@@ -93,6 +95,7 @@ int main(){
     c3.display();
     return 0;
 }
+
 
 
 
@@ -262,12 +265,156 @@ int main(){
 
 // Encapsulation is the binding of data and functions that operate on that data into a single unit (class) and restricting direct access to some of the object's components.
 // Achieved using access specifiers: private, public, and protected.
-
 // Data (variables) are usually made private, and access is given via public getter/setter methods.
-
 // Helps in data hiding and protection from unauthorized access.
 
 
+
+
+
+
+
+//Friend function: a function that is not a member of a class, but is given access to the class’s private and protected members.
+//Declare it inside the class using friend keyword and Define it outside the class	Like a normal function
+#include<iostream>
+using namespace std;
+class Box{
+    private:
+    int l;
+
+    public: 
+    Box(){
+        l=10;
+    }
+    //declaring friend function  ('print' is not a member of 'Box' class)
+    friend void print(Box b);  
+};
+
+//defining friend function outside the class as it's not the part of class
+void print(Box b){
+    cout<<"Length is: "<<b.l<<endl;  //accessing private member
+}
+
+int main(){
+    Box b1; 
+    print(b1);
+    
+    return 0;
+}
+
+
+
+
+
+
+//Friend class
+// A class that is allowed to access the private and protected members of another class.
+// If class B is a friend of class A, then all member functions of B can access private data of A.
+
+#include<iostream>
+using namespace std;
+class B; //forward declaration
+class A{
+    private:
+    int x;
+    public:
+    A(){
+        x=12;
+    }
+    friend class B;  //B is the friend of A (B can access all the private members of A)
+};
+class B{
+    public:
+    void show(A obj){
+        cout<<"Value of x is: "<<obj.x<<endl; //accessing private member of A
+    }
+};
+int main(){
+    A obj1;
+    B obj2;
+    obj2.show(obj1);  //passing object of A to 'show' function (function of B)
+}
+
+
+
+
+
+
+
+
+// Non-static members -> belong to each object of the class (every object gets it's own copy)
+// Static members -> belong to class, not to any object[shared by all object] [defined outside the class]
+#include<iostream>
+using namespace std;
+class Student{
+    public:
+    string name;
+    static string school; //shared vy all object  (accessed using class name)
+
+    Student(string n){
+        name =n;
+    }
+    void display(){
+        cout<<name <<" studies at "<<school<<endl;
+    }
+};
+
+// Static member must be defined outside the class
+string Student::school = "ABC High School";
+
+int main(){
+    Student s1("Mike");
+    Student s2("Billy");
+
+    s1.display();
+    s2.display();
+
+    Student::school="XYZ Public School";  //change static member using class name
+
+    s1.display();
+    s2.display();
+    
+    return 0;
+}
+
+
+
+
+
+
+//Eumerator:  enum is used to create named constants
+
+#include<iostream>
+using namespace std;
+//declaring enumerator wirh three named constants
+enum Day { MONDAY, TUESDAY, WEDNESDAY };   //MONDAY = 0, TUESDAY = 1, WEDNESDAY = 2 by default.
+
+int main() {
+    Day today = TUESDAY;  //declare variable 'today' of type 'Day' with value'TUESDAY' which internally is just '1'
+    cout << today << endl;  // Output: 1
+    return 0;
+}
+
+
+
+
+
+//Inline function   [Suggests the compiler to replace function call with the actual code.]
+// used for short functions
+// it’s just a request to the compiler.
+// inline returnType functionName(params) {}
+
+#include<iostream>
+using namespace std;
+
+inline int square(int x) {
+    return x * x;
+}
+
+int main() {
+    cout << square(4);  // Here, instead of calling square(4), the compiler may directly replace it with 4 * 4
+    return 0;
+}
 
 
 
