@@ -244,6 +244,13 @@ int main(){
     obj->withdraw(3000);
     delete obj;
 
+    //or
+    /*
+    SBI s;
+    ATM *obj=&s;
+    obj->withdraw(3000);
+    */
+
     return 0;
 }
 
