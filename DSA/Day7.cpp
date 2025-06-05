@@ -582,10 +582,11 @@ int main(){
     return 0;
 }
 
-// E
-// D E
-// C D E
-// B C D E
-// A B C D E
+// E            //5 to 5
+// D E          //4 to 5
+// C D E        //3 to 5
+// B C D E      //2 to 5
+// A B C D E    //1 to 5
+
 
 
