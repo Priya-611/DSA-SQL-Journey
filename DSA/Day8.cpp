@@ -226,6 +226,42 @@ int majorityElement(vector<int>& nums) {
 
 
 
+//905: Sort Array by parity: move all even number at the beginning followed by odd
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& nums) {
+        int i=0,j=nums.size()-1;
+        while(i<j){
+            if(nums[i]%2==0) i++;  //if there is even in beginnning move the index
+            else if(nums[j]%2!=0) j--;    //if there is odd at the ending move the index
+            else{                   //if odd at beginning and even at end  -> swap
+                swap(nums[i],nums[j]);     //(nums[i]%2!=0 && nums[j]%2==0)
+                i++;
+                j--;
+            }
+        }
+        return nums;
+    }
+};
+
+//optimal 
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& nums) {
+        int i=0;
+        for(int j=0;j<nums.size();j++){
+            if(nums[j]%2==0){  //if you find even element swap it with ith element 
+                swap(nums[j],nums[i]); 
+                i++;  //increase i only if you find even at j
+            }
+        }
+        return nums;
+    }
+};
+
+
+
+
 //88: 
 //merging sorted array in array 1 itself
 class Solution {
@@ -240,6 +276,158 @@ public:
         }
         while(i>=0) nums1[k--]=nums1[i--];
         while(j>=0) nums1[k--]=nums2[j--];
+    }
+};
+
+
+
+
+
+
+//1299 : replacing element with greatest element on the right side
+class Solution {
+public:
+    vector<int> replaceElements(vector<int>& arr) {
+        int max=-1;  //initially max is -1
+        for(int i=arr.size()-1;i>=0;i--){
+            int x=arr[i];  //current element
+            arr[i]=max;//replacing max every time
+            if(x>max) max=x; // comparing each ele with max  and replacing only if x (current ele) is greater
+        }
+        return arr;
+    }
+};
+
+
+
+
+
+
+
+//724: Find pivot index
+// um of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int k=0;
+        while(k<nums.size()){
+        int rs=0,ls=0;
+        
+        for(int i=0;i<k;i++){
+            rs+=nums[i];
+        }
+        for(int i=k+1;i<nums.size();i++){
+            ls+=nums[i];
+        }
+        if(rs==ls) return k;
+        k++;
+        }
+        return -1;
+    }
+};
+
+
+
+//optimal Solution
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int t=0,ls=0;
+        for(int num:nums) t+=num;//find total Sum
+        
+        for(int i=0;i<nums.size();i++){
+            if(ls == t-ls-nums[i]) return i; //leftSum == rightSum(total - leftSum - current element)
+            ls+=nums[i];
+        }
+        return -1;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+//88: 
+//merging sorted array in array 1 itself
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int i= m-1,j=n-1;
+        int k=m+n-1;
+        //fill in reverse order (biggest element first)        
+        while(i>=0 && j>=0){
+            if(nums1[i]>nums2[j]) nums1[k--]=nums1[i--];
+            else nums1[k--]= nums2[j--];
+        }
+        while(i>=0) nums1[k--]=nums1[i--];
+        while(j>=0) nums1[k--]=nums2[j--];
+    }
+};
+
+
+
+
+
+
+//1299 : replacing element with greatest element on the right side
+class Solution {
+public:
+    vector<int> replaceElements(vector<int>& arr) {
+        int max=-1;  //initially max is -1
+        for(int i=arr.size()-1;i>=0;i--){
+            int x=arr[i];  //current element
+            arr[i]=max;//replacing max every time
+            if(x>max) max=x; // comparing each ele with max  and replacing only if x (current ele) is greater
+        }
+        return arr;
+    }
+};
+
+
+
+
+
+
+
+//724: Find pivot index
+// um of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int k=0;
+        while(k<nums.size()){
+        int rs=0,ls=0;
+        
+        for(int i=0;i<k;i++){
+            rs+=nums[i];
+        }
+        for(int i=k+1;i<nums.size();i++){
+            ls+=nums[i];
+        }
+        if(rs==ls) return k;
+        k++;
+        }
+        return -1;
+    }
+};
+
+//optimal Solution
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int t=0,ls=0;
+        for(int num:nums) t+=num;//find total Sum
+        
+        for(int i=0;i<nums.size();i++){
+            if(ls == t-ls-nums[i]) return i; //leftSum == rightSum(total - leftSum - current element)
+            ls+=nums[i];
+        }
+        return -1;
     }
 };
 
