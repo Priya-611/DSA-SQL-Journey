@@ -193,3 +193,34 @@ public:
         return maxS;
     }
 };
+
+
+
+
+
+
+
+
+//3: Longest substring without repeating character
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> idx(256, -1);  //for each char idx is -1(which means at -1th index)
+        int maxL=0;  //maxlength is 0
+        int start=0;  //start is at 0
+
+        for(int i=0;i<s.length();i++){
+
+            if(idx[s[i]]>=start){  //if the index of any char > start(it means it is already once visited)
+                start= idx[s[i]] + 1; //shift start to the next index
+            }
+            idx[s[i]] =i;  //(store index of that char as i)
+            int curr=i-start+1; //length of current substring 
+            maxL=max(maxL,curr);
+        } 
+        return maxL;
+    }
+};
+
+
