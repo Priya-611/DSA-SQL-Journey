@@ -170,3 +170,26 @@ public:
 
 
 
+
+
+
+
+
+//53: Maximum Subarray
+// storing first ele as max and curr
+//current Sum -> either the (current value) or (current + new element)
+
+// storing whichever is maximum among both
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxS=nums[0];
+        int currS=nums[0];
+        for(int i=1;i<nums.size();i++){
+           
+            currS= max(nums[i], currS+nums[i]);
+            maxS=max(maxS, currS);
+        }
+        return maxS;
+    }
+};
