@@ -1,4 +1,4 @@
-WEEK 1:
+C++ Basics: 
 
 Day 1: C++ Basics & Control Flow
 - Core Syntax: iostream, namespaces, main function.
