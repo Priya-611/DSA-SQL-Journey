@@ -1,4 +1,4 @@
-// deletion in DCLL
+// deletion in DCLL (Doubly Circular LL)
 
 //1. by position: 
 #include<iostream>
@@ -169,7 +169,7 @@ int main(){
 
 
 
-//Examples:
+//Examples on Doubly Circular Linked List
 //Q) Searching value in DCLL
 #include<iostream>
 using namespace std;
@@ -321,7 +321,14 @@ int main(){
 
 
 
-//Q) delete middle value in single traversal
+//Q) delete middle value in single traversal from DCLL
+// Tortoise and Hare Algorithm (Two-Pointer Technique)
+// slow moves one step at a time.
+// fast moves two steps at a time.
+// When fast reaches the end (or loops back to start in circular lists), slow will be at the middle.
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
 #include<iostream>
 using namespace std;
 struct link{
@@ -382,7 +389,7 @@ void deleteMiddle(){
 }
 void display(){
     link *ptr=start;
-    //usiing do-while loop here
+    //using do-while loop here
     // We always want to print at least the head and stop once we're back at the start
     do{
         cout<<ptr->data<<" ";
