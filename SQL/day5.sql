@@ -95,3 +95,14 @@ group by c.customername;
 
 
 
+-- (Get total sales per customer, then filter:)
+-- (customer with total sales more than 100000)
+select customername, total_sales from(
+select c.customername , sum(od.quantityordered * od.priceeach) as total_sales from customers as c
+inner join orders as o on c.customernumber = o.customernumber 
+inner join order_details as od on o.ordernumber = od.ordernumber
+group by c.customername
+) as sales_data
+where total_sales > 100000;
+
+
