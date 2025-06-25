@@ -135,3 +135,37 @@ SELECT customername from customers where customernumber in(
     )
 );
 
+
+
+-- SUBQUERIES using in/not in
+
+SELECT customername from customers where customernumber in(
+    select distinct customernumber from orders);
+
+SELECT customername from customers where customernumber not in(
+    select distinct customernumber from orders);
+
+
+
+-- correlated(depends on outer query)
+-- This links c1 and c2 by country, dynamically comparing row by row.
+SELECT customername,country,creditlimit from customers c1 where creditlimit>(
+    select avg(creditlimit) from customers c2 where c1.country = c2.country
+)
+
+
+
+-- using subquery using from (derived table)
+SELECT * from(
+    select customernumber , sum(quantityordered *priceeach) as total from orders as o 
+    join order_details as od on o.ordernumber= od.ordernumber 
+    group by customernumber
+) as total_table
+where total>100000;
+
+
+
+-- Using subquery in SELECT (computed column)
+select customername, (SELECT count(*) from orders as o where o.customernumber= c.customernumber) as order_count from customers as c;
+
+
