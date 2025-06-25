@@ -69,7 +69,7 @@ where o.ordernumber is null;
 
 
 
--- Show all orders placed by customers from Germany
+-- (Show all orders placed by customers from Germany)
 select c.customername, o.ordernumber, o.orderdate from customers as c
 inner join orders as o on c.customernumber= o.customernumber where c.country="USA";
 
@@ -105,4 +105,33 @@ group by c.customername
 ) as sales_data
 where total_sales > 100000;
 
+
+
+-- (Orders that have order details)
+SELECT ordernumber from orders where ordernumber in (
+    select distinct ordernumber from order_details
+);
+/**
+DISTINCT is used to remove duplicate values from the result of a SELECT query.
+ It tells SQL: “Only give me unique results!”
+**/
+
+
+
+-- (Customers who have placed orders but none of them had more than 30 items)
+select customername from customers where customernumber in( 
+    select customernumber from orders where ordernumber in(
+        select ordernumber from order_details group by ordernumber having sum(quantityordered) <=30
+    )
+);
+
+
+
+
+-- (Customers who have placed orders for more than one product)
+SELECT customername from customers where customernumber in(
+    select customernumber from orders where ordernumber in(
+        SELECT ordernumber from order_details group by ordernumber having count(productcode) > 1
+    )
+);
 
