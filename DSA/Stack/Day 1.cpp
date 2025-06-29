@@ -37,6 +37,18 @@ Ways to Implement a Stack:
 // Stack underflow occurs when you try to pop an element from an empty stack.
 
 
+// Do not confuse between a user-defined stack and stack in memory
+/*
+1. Call Stack (Memory Stack / System Stack) ->  part of computer memory used by the CPU to manage function calls, local variables, and return addresses during program execution.
+    -> Managed by the compiler(runtime). / Each function call gets a stack frame. / When a function is called, a new frame is pushed onto the call stack.
+    -> When a function returns, the frame is popped off the stack. / Stored in RAM, grows/shrinks automatically as functions are called and return.
+    -> It's limited in size (can cause stack overflow if you use too much, e.g., deep recursion).
+
+2. Stack Data Structure (User-defined Stack) -> This is the data structure you define in your program using: Array, Linked list, STL (stack<int>, etc.)
+    -> Follows LIFO: Last In, First Out.
+    -> You manually define and control it.
+    -> Used for problems like: Expression evaluation (e.g., postfix), Undo operations, Balancing parentheses, DFS traversal 
+*/
 
 
 
@@ -240,5 +252,254 @@ int main(){
         }
     }  
 }
+
+
+
+
+
+
+// Operations in vector
+/*
+| **Operation**         | **Description**                                                              |
+| --------------------- | ---------------------------------------------------------------------------- |
+| `push_back(x)`        | Adds element `x` to the end of the vector.                                   |
+| `pop_back()`          | Removes the last element.                                                    |
+| `insert(pos, val)`    | Inserts `val` at the position `pos` (iterator).                              |
+| `erase(pos)`          | Removes the element at the given position (iterator).                        |
+| `clear()`             | Removes all elements from the vector.                                        |
+| `size()`              | Returns the number of elements in the vector.                                |
+| `capacity()`          | Returns the current capacity (allocated memory size).                        |
+| `resize(n)`           | Resizes the vector to `n` elements. New elements initialized with default.   |
+| `reserve(n)`          | Reserves memory for at least `n` elements (to avoid frequent reallocations). |
+| `empty()`             | Returns `true` if the vector is empty.                                       |
+| `at(index)`           | Returns reference to element at `index` (with bounds checking).              |
+| `front()`             | Returns the first element.                                                   |
+| `back()`              | Returns the last element.                                                    |
+| `begin()` / `end()`   | Returns iterator to the first/last+1 element.                                |
+| `rbegin()` / `rend()` | Returns reverse iterator to last/first–1 element.                            |
+| `assign(n, val)`      | Fills vector with `n` copies of `val`.                                       |
+| `swap(v2)`            | Swaps contents with another vector `v2`.                                     |
+| `emplace(pos, val)`   | Constructs element `val` in-place at `pos` (faster than insert).             |
+| `emplace_back(val)`   | Constructs element at the end (faster than push\_back).                      |
+*/
+
+
+// Stack using vector
+#include<iostream>
+#include<vector>
+using namespace std;
+ 
+class Stack{
+    vector<int> v;
+    public:
+    void push(){
+        int n;
+        cout<<"Enter element: ";
+        cin>>n;
+        cout<<"Element inserted: "<<n<<endl;
+        v.push_back(n);
+    }
+
+    void pop(){
+        if(v.empty()){
+            cout<<"Underflow"<<endl;
+            exit(0);
+        }
+        cout<<"Element deleted: "<<v.back()<<endl;
+        v.pop_back();
+    }
+
+    int top(){
+        if(v.empty()){
+            cout<<"stack is empty\n";
+            return -1;
+        }
+        return v.back();
+    }
+
+    bool isEmpty(){
+        return v.empty();
+    }
+
+    void display(){
+        if(v.empty()){
+            cout<<"Stack is empty"<<endl;
+            return;
+        }
+        cout<<"Elements are: ";
+        for(int i=v.size()-1;i>=0;i--){
+            cout<<v[i]<<" ";
+        }
+    }
+};
+int main(){
+    Stack s;
+    cout<<"Enter '1' to push element\nEnter '2' to pop element\nEnter '3' to display all elements\nEnter '4' to see the topmost element\nEnter '5' to see if vector is empty or not\nEnter '-1' to exit\n";
+    int choice;
+
+    while(true){
+        cout<<"\nEnter choice: ";
+        cin>>choice;
+        switch(choice){
+            case 1:   //insertion
+                s.push();
+                break;
+            case 2:  //deletion
+                s.pop();
+                break;
+            case 3:  
+                s.display();
+                break;
+            case 4: 
+                cout<<"Top element : "<<s.top(); //to see the topmost element
+                break;
+             case 5:
+                cout << (s.isEmpty() ? "Stack is empty" : "Stack is not empty") << endl;
+                break;
+            case -1:
+                exit(0);
+            default:
+                cout<<"Enter correct choice: ";    
+        }
+    }
+}
+
+
+
+
+
+//Template: allows you to write generic code — meaning, you can create a function or class that works with any data type (int, float, string, custom class, etc.) without rewriting the code for each type.
+/*
+template<typename T>
+class Stack {
+    // works with T = int, float, string, etc.
+};
+*/
+
+#include<iostream>
+#include<vector>
+using namespace std;
+ 
+template<typename T>
+class Stack{
+    vector<T> v;
+
+    public:
+    void push(T val){
+        cout<<"Element inserted: "<<val<<endl;
+        v.push_back(val);
+    }
+
+    void pop(){
+        if(v.empty()){
+            cout<<"Underflow\n"<<endl;
+            return;
+        }
+        cout<<"Element deleted: "<<v.back()<<endl;
+        v.pop_back();
+    }
+
+    T top(){
+        if(v.empty()){
+            cout<<"stack is empty\n";
+            return T(); // default value (0 for int, "" for string, etc.)
+        }
+        return v.back();
+    }
+
+    bool isEmpty(){
+        return v.empty();
+    }
+
+    void display(){
+        if(v.empty()){
+            cout<<"Stack is empty"<<endl;
+            return;
+        }
+        cout<<"Elements are: ";
+        for(int i=v.size()-1;i>=0;i--){
+            cout<<v[i]<<" ";
+        }
+        cout<<endl;
+    }
+};
+int main(){
+    Stack<int> s;
+    cout<<"Enter '1' to push element\nEnter '2' to pop element\nEnter '3' to display all elements\nEnter '4' to see the topmost element\nEnter '5' to see if vector is empty or not\nEnter '-1' to exit\n";
+    int choice;
+
+    while(true){
+        cout<<"\nEnter choice: ";
+        cin>>choice;
+        switch(choice){
+            case 1:   //insertion
+                int n;
+                cout<<"Enter element: ";
+                cin>>n;
+                s.push(n);
+                break;
+            case 2:  //deletion
+                s.pop();
+                break;
+            case 3:  
+                s.display();
+                break;
+            case 4: 
+                cout<<"Top element : "<<s.top()<<endl; //to see the topmost element
+                break;
+             case 5:
+                cout << (s.isEmpty() ? "Stack is empty" : "Stack is not empty") << endl;
+                break;
+            case -1:
+                exit(0);
+            default:
+                cout<<"Enter correct choice: ";    
+        }
+    }
+}
+// for string
+/*
+int main(){
+    Stack<string> s;
+    cout<<"Enter '1' to push element\nEnter '2' to pop element\nEnter '3' to display all elements\nEnter '4' to see the topmost element\nEnter '5' to see if vector is empty or not\nEnter '-1' to exit\n";
+    int choice;
+    cin.ignore();     // Clear input buffer
+    while(true){
+        cout<<"\nEnter choice: ";
+        cin>>choice;
+        cin.ignore();   // Clear newline left after int input
+        switch(choice){
+            case 1: {  //insertion
+                string n;
+                cout<<"Enter element: ";
+                getline(cin, n);  //for input string
+                s.push(n);
+                break;
+            }
+        }
+    }
+}
+
+*/
+
+//or
+/*
+int main() {
+    Stack<int> s1;
+    s1.push(10);
+    s1.push(20);
+    s1.display();
+    s1.pop();
+
+    Stack<string> s2;
+    s2.push("Hello");
+    s2.push("World");
+    s2.display();
+    cout << "Top: " << s2.top() << endl;
+
+    return 0;
+}
+*/
+
 
 
