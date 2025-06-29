@@ -1,4 +1,4 @@
-Linked Lsit:
+Linked List:
 
 - Day 1: Basics of Singly Linked List (SLL)
   * Introduction to Linked List: structure, advantages over arrays.
@@ -6,18 +6,18 @@ Linked Lsit:
   * `struct` and pointer-based dynamic memory management.
   * Creating a singly linked list.
   * Displaying elements.
-  * Finding the **largest element**.
-  * **Summing** all elements.
-  * **Sorting** elements.
-  * Creating **multiple linked lists** (2 and 5 lists).
-  * Printing a list in **reverse** (through logic).
+  * Finding the largest element.
+  * Summing all elements.
+  * Sorting elements.
+  * Creating multiple linked lists (2 and 5 lists).
+  * Printing a list in reverse (through logic).
 
 
 - Day 2: Insertion, Deletion & Merge in SLL
   * Dynamic creation (with `-1` as stop signal).
-  * Inserting at **any position**.
-  * Deleting from a **given position** or a **given value**.
-  * Merging **two sorted lists** into a new list.
+  * Inserting at any position.
+  * Deleting from a given position or a given value.
+  * Merging two sorted lists into a new list.
   * "Skip Y delete X" pattern logic.
   * Difference between position-based and value-based deletion.
   * Traversal logic and pointer adjustment.
@@ -29,7 +29,7 @@ Linked Lsit:
   * Introduction to DLL: bidirectional traversal using `prev` and `next`.
   * Creating, displaying forward and backward.
   * Insertion at any position.
-  * Deletion by position and by **value**.
+  * Deletion by position and by value.
   * Finding length of DLL.
   * Carefully managing both `prev` and `next` pointers.
   * Boundary conditions like deletion at first/last node.
@@ -82,7 +82,7 @@ Linked Lsit:
 
   Conceptual Focus:
   * Efficient handling of edge cases.
-  * Deep use of **Floyd’s algorithm**.
+  * Deep use of Floyd’s algorithm.
   * Combination of multiple operations: reverse + merge, or detect + reposition.
 
 
@@ -92,7 +92,7 @@ Linked Lsit:
   * STL Practice:
     * `std::list` (Doubly LL), `std::forward_list` (Singly LL).
     * Covered insertion, deletion, traversal, sorting, merging.
-    * Emulated **circular list traversal** with `std::list`.
+    * Emulated circular list traversal with `std::list`.
     * Using `auto`, `advance()`, iterators for STL-based LLs.
     * Efficient list operations using C++ STL.
 
