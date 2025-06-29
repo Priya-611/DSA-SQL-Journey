@@ -68,4 +68,38 @@ Day 7: Number Conversions & Patterns
      Alphabet patterns (sequential, row-wise, and reverse).
 
 
+Day 8: LeetCode problems
+- String manipulation:
+     Length of Last Word (Q58)
+     Valid Palindrome (Q125)
+     Check for Pangram (Q1832)
+     Anagram Check (Q242)
+     Longest Common Prefix (Q14)
+- Array problems:
+     Remove Element (Q27)
+     Merge Sorted Array (Q88)
+     Replace Elements with Greatest on Right (Q1299)
+     Pivot Index (Q724)
+- Bitwise and logic-based checks:
+     Add Digits (Q258)
+     Is Power of Two (Q231)
+     Majority Element (Q169) — also practiced optimal Boyer-Moore Voting Algorithm.
+- Array reordering problems:
+     Sort Array by Parity (Q905) — both two-pointer and optimized versions.
+
+
+Day 9: LeetCode problems - II
+- Sorting and selection:
+     Third Maximum Number (Q414)
+     Relative Sort Array (Q1122)
+- Cycle Detection:
+     Find Duplicate Number (Q287) — practiced Floyd's Tortoise and Hare algorithm.
+- Counting-based problems:
+     Maximum Count of Positives/Negatives (Q2529)
+     Divide Array into Equal Pairs (Q2206)
+     Count Symmetric Integers (Q2843)
+- Window-based technique:
+     Maximum Average Subarray (Q643) — applied fixed-size sliding window approach.
+- Matrix traversal:
+     Spiral Matrix (Q54) — handled direction-wise simulation of matrix traversal.
 
