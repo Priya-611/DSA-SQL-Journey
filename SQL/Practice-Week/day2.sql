@@ -81,3 +81,81 @@ select distinct author_id as id from Views where author_id= viewer_id order by a
 select tweet_id from Tweets where length(content)>15;
 
 
+
+
+
+
+
+
+-- 1378. Replace Employee ID With The Unique Identifier
+-- Employees table:
+-- +----+----------+
+-- | id | name     |
+-- +----+----------+
+-- | 1  | Alice    |
+-- | 7  | Bob      |
+-- | 11 | Meir     |
+-- | 90 | Winston  |
+-- | 3  | Jonathan |
+-- +----+----------+
+-- EmployeeUNI table:
+-- +----+-----------+
+-- | id | unique_id |
+-- +----+-----------+
+-- | 3  | 1         |
+-- | 11 | 2         |
+-- | 90 | 3         |
+-- +----+-----------+
+select eu.unique_id , e.name from Employees e left join EmployeeUNI eu on e.id=eu.id;
+
+
+
+
+
+
+
+-- 1068. Product Sales Analysis I
+-- Sales table:
+-- +---------+------------+------+----------+-------+
+-- | sale_id | product_id | year | quantity | price |
+-- +---------+------------+------+----------+-------+ 
+-- | 1       | 100        | 2008 | 10       | 5000  |
+-- | 2       | 100        | 2009 | 12       | 5000  |
+-- | 7       | 200        | 2011 | 15       | 9000  |
+-- +---------+------------+------+----------+-------+
+-- Product table:
+-- +------------+--------------+
+-- | product_id | product_name |
+-- +------------+--------------+
+-- | 100        | Nokia        |
+-- | 200        | Apple        |
+-- | 300        | Samsung      |
+-- +------------+--------------+
+select p.product_name , s.year,s.price from Sales s left join Product p on p.product_id=s.product_id;
+
+
+
+
+
+
+
+-- 577. Employee Bonus
+--   Employee table:
+-- +-------+--------+------------+--------+
+-- | empId | name   | supervisor | salary |
+-- +-------+--------+------------+--------+
+-- | 3     | Brad   | null       | 4000   |
+-- | 1     | John   | 3          | 1000   |
+-- | 2     | Dan    | 3          | 2000   |
+-- | 4     | Thomas | 3          | 4000   |
+-- +-------+--------+------------+--------+
+-- Bonus table:
+-- +-------+-------+
+-- | empId | bonus |
+-- +-------+-------+
+-- | 2     | 500   |
+-- | 4     | 2000  |
+-- +-------+-------+
+select e.name, b.bonus from Employee e left join Bonus b on e.empId=b.empId where bonus<1000 or bonus is null;
+
+
