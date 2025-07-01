@@ -83,13 +83,7 @@ public:
 // 1475. Final Prices With a Special Discount in a Shop
 // Input: prices = [8,4,6,2,3]
 // Output: [4,2,4,2,3]
-// Explanation: 
-// For item 0 with price[0]=8 you will receive a discount equivalent to prices[1]=4, therefore, the final price you will pay is 8 - 4 = 4.
-// For item 1 with price[1]=4 you will receive a discount equivalent to prices[3]=2, therefore, the final price you will pay is 4 - 2 = 2.
-// For item 2 with price[2]=6 you will receive a discount equivalent to prices[3]=2, therefore, the final price you will pay is 6 - 2 = 4.
-// For items 3 and 4 you will not receive any discount at all.
-
-//if no smaller elemnet found for discount copy the same element
+// Explanation: e same element
 
 class Solution {
 public:
@@ -107,6 +101,12 @@ public:
     }
 };
 
+// For item 0 with price[0]=8 you will receive a discount equivalent to prices[1]=4, therefore, the final price you will pay is 8 - 4 = 4.
+// For item 1 with price[1]=4 you will receive a discount equivalent to prices[3]=2, therefore, the final price you will pay is 4 - 2 = 2.
+// For item 2 with price[2]=6 you will receive a discount equivalent to prices[3]=2, therefore, the final price you will pay is 6 - 2 = 4.
+// For items 3 and 4 you will not receive any discount at all.
+
+//if no smaller elemnet found for discount copy th
 
 
 
@@ -171,6 +171,48 @@ public:
             else if (o=="++X") x=1+x;
         }
         return x;
+    }
+};
+
+
+
+
+
+
+
+// 1003. Check If Word Is Valid After Substitutions
+// Input: s = "aabcbc"
+// Output: true
+// Explanation:
+// "" -> "abc" -> "aabcbc"
+// Thus, "aabcbc" is valid.
+    
+// Example 2:
+// Input: s = "abccba"
+// Output: false
+// Explanation: It is impossible to get "abccba" using the operation.
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+        for(char c:s){  //push char in stack 
+            st.push(c);
+            if(st.size()>=3){  //if there are 3 or more elements in stack check top 3 element,, if they are not in this sequence 'abc' push them back, else pop them
+                char c1=st.top();
+                st.pop();
+                char c2=st.top();
+                st.pop();
+                char c3=st.top();
+                st.pop();
+                if(c1!='c' || c2!='b' ||c3!='a'){
+                    st.push(c3);
+                    st.push(c2);
+                    st.push(c1);
+                }
+            }
+        }
+        return st.empty();
     }
 };
 
