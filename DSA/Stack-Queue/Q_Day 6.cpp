@@ -2,6 +2,7 @@
 // -> Linear data structure where elements can be:
 // -> Inserted and deleted from both ends — front and rear.
 
+// Using Array | Using Linked List | Using STL
 
 // I. Using Array
 #include<iostream>
@@ -585,7 +586,7 @@ int main(){
 
 
 
-// Q) Reversing Queue usning recursion
+// Q) Reversing Queue using recursion
 /*
 | Step      | temp has      | queue has  |
 | --------- | ------------- | ---------- |
@@ -658,3 +659,218 @@ int main(){
 }
 
 
+
+
+
+
+
+// Priority Queue
+
+// A priority queue is like a normal queue, but:
+// Each element has a priority
+// The element with highest priority is served first
+// (Not necessarily the one inserted first)
+
+// pq.top() -> gets element with highest priority (not front!)
+// pq.pop() -> removes the top (i.e. highest priority)
+
+/*/
+1. Max Priority Queue (default in STL)
+Highest value comes first
+#include <queue>
+priority_queue<int> maxPQ;
+
+2. Min Priority Queue (have to customize it using greater<int> in STL)
+Lowest value comes first
+#include <queue>
+priority_queue<int, vector<int>, greater<int>> minPQ;
+*/
+
+
+
+// 1. Max Priority Queue Example
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main(){
+    priority_queue<int> pq;  // Create a priority queue of integers
+    pq.push(10);  // Insert elements into the priority queue
+    pq.push(30);
+    pq.push(50);
+    pq.push(20);
+    pq.push(40);
+
+    cout << "Top element: " <<pq.top()<<endl;  // Get the top element (highest priority) // 50
+    cout<<"Priority Queue Elements: ";
+    while(!pq.empty()){
+        cout << pq.top() << " ";  //50 40 30 20 10
+        pq.pop();
+    }
+    cout << endl;
+}
+
+
+
+
+
+
+// 2. Min Priority Queue Example
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main(){
+    priority_queue<int, vector<int>, greater<int>> min_pq;  // Create a priority queue of integers
+    min_pq.push(10);  // Insert elements into the priority queue
+    min_pq.push(30);
+    min_pq.push(50);
+    min_pq.push(20);
+    min_pq.push(40);
+
+    cout << "Top element: " << min_pq.top() << endl;  // Get the top element (highest priority) // 10
+    cout << "Priority Queue Elements: ";
+    while (!min_pq.empty()) {
+        cout << min_pq.top() << " ";  // 10 20 30 40 50
+        min_pq.pop();
+    }
+    cout << endl;
+}
+/*
+i. priority_queue<int, ...>
+You’re creating a priority queue of integers
+
+ii. vector<int>
+The underlying container to store the elements.
+Priority queue uses a vector by default to implement a heap.
+You can imagine this as:
+"Hey priority queue, use a vector<int> to store the elements internally."
+
+iii. greater<int>
+This is the comparator.
+It reverses the priority logic:
+Instead of putting largest elements on top (default),
+It puts smallest elements on top.
+This makes it behave like a Min Heap.
+
+Without this (greater<int>), the default is less<int>, which gives you a Max Heap.
+*/
+
+
+
+
+
+
+// Custom Priority Queue Example
+/*
+The priority queue or heap uses your comparator to decide the order while building the internal structure (usually a binary heap).
+ bool operator()(const A& a, const B& b)
+-> Returns true: a has lower priority, so a should go down(swap a and b such that b comes before a in the queue)
+-> Returns false: a has higher or equal priority, so a stays(do not swap i.e. a comes before b in the queue)
+*/
+#include <iostream>
+#include <queue>
+#include <string>
+using namespace std;
+
+struct Patient {
+    string name;
+    int severity;
+    int arrivalOrder;
+};
+
+//custom comparator for the priority queue
+struct Compare {
+    bool operator()(const Patient& p1, const Patient& p2) {
+        if(p1.severity == p2.severity){
+            return p1.arrivalOrder > p2.arrivalOrder;
+        }
+        return p1.severity < p2.severity;  //higher severity has higher priority
+    }
+};
+
+int main(){
+    priority_queue<Patient, vector<Patient>, Compare> pq;  // Create a priority queue of integers
+    pq.push({"Steve", 5, 1});
+    pq.push({"John", 4, 2});
+    pq.push({"Nancy", 3, 4});
+    pq.push({"Edie", 6, 3});
+    pq.push({"Robin", 4, 5});
+
+    cout << "Priority Queue Elements: \n";
+    while (!pq.empty()) {
+        cout << "Patient: " << pq.top().name << ", Severity: " << pq.top().severity << ", Arrival Order: " << pq.top().arrivalOrder << endl;
+        pq.pop();
+    }
+    cout << endl;
+
+    return 0;
+}
+/*output:
+Priority Queue Elements: 
+Patient: Edie, Severity: 6, Arrival Order: 3
+Patient: Steve, Severity: 5, Arrival Order: 1
+Patient: John, Severity: 4, Arrival Order: 2
+Patient: Robin, Severity: 4, Arrival Order: 5
+Patient: Nancy, Severity: 3, Arrival Order: 4
+*/
+
+
+
+
+
+
+//Another Simple Example for Priority Queue
+
+// this is a 1D vector of pair:
+// Index:   0       1       2       ...     n-1
+// Value:  (a,b)   (c,d)   (e,f)   ...    (x,y)
+
+// sort() goes through the vector and uses compare(a, b) automatically to decide the order of every pair.
+// You don't call compare() manually — it's passed as a function pointer to sort(), and sort() uses it repeatedly.
+
+// compare({2, 40}, {1, 60}) → returns false → means second comes first
+// compare({2, 40}, {3, 20}) → returns true → means first comes first
+
+#include <iostream>
+#include <queue>
+using namespace std;
+
+bool compare(pair<int,int> a, pair<int,int> b){
+    //if priorities are equal, compare based on the second element (number)
+    if(a.first==b.first) return a.second < b.second;
+
+    //otherwise, compare based on the first element (priority)
+    return a.first < b.first; 
+}
+
+int main(){
+    int n;
+    cout<<"Enter size of the queue: ";
+    cin>>n;
+
+    vector<pair<int,int>> v(n);
+    cout<<"Enter the elements of the queue (priority and number):\n";
+    for(int i=0;i<n;i++){
+        cin>>v[i].first; //first element is the priority
+        cin>>v[i].second; //second element is the number    
+    }
+
+    sort(v.begin(),v.end(),compare);  //This puts the vector of pairs into the correct order before pushing into the queues.
+    // Then when you pop from q2, you're printing in sorted priority order.
+
+    queue<int> q1,q2;
+
+    //q2 hold number in sorted order[acc to priority]
+    for(int i=0;i<n;i++){
+        q1.push(v[i].first);  //push the priority into queue1
+        q2.push(v[i].second);  //push the number into queue2
+    }
+
+    while(!q2.empty()){
+        cout<<q2.front()<<" ";  //display the number
+        q2.pop();  //remove the front element from queue2
+    }
+
+    return 0;
+}
