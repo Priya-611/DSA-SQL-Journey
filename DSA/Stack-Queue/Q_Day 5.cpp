@@ -294,21 +294,6 @@ int main(){
 
 
 
-//                 break;
-//             case -1:
-//                 exit(0);   //for exiting the program
-//             default:
-//                 cout<<"Enter correct choice\n";
-
-//         }
-//     }  
-// }
-
-
-
-
-
-
 
 // 4. Using Circular Queue
 // A circular queue is a linear data structure in which the last position is connected back to the first position to make a circle.
