@@ -820,7 +820,7 @@ Patient: Nancy, Severity: 3, Arrival Order: 4
 
 
 
-//Another Simple Example for Priority Queue
+//Another Simple Example for Custom Priority Queue
 
 // this is a 1D vector of pair:
 // Index:   0       1       2       ...     n-1
