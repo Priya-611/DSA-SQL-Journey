@@ -833,6 +833,8 @@ Patient: Nancy, Severity: 3, Arrival Order: 4
 // compare({2, 40}, {3, 20}) → returns true → means first comes first
 
 #include <iostream>
+#include<algorithm>
+#include <vector>
 #include <queue>
 using namespace std;
 
@@ -874,7 +876,5 @@ int main(){
 
     return 0;
 }
-
-
 
 
