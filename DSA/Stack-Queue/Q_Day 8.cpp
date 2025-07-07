@@ -125,6 +125,157 @@ public:
 
 
 
+// 641. Design Circular Deque
+// using vector
+/*
+class MyCircularDeque {
+    vector<int>cd;
+    int f,r,size,capacity;
+public:
+    MyCircularDeque(int k) {
+        cd.resize(k);
+        f=0;
+        r=k-1;
+        size=0;
+        capacity=k;
+    }
+    bool insertFront(int value) {
+        if(isFull()) return false;
+        f=(f-1+capacity)%capacity;  //for wraping around (circular behaviour)
+        cd[f]=value;
+        size++;
+        return true;
+    }
+    bool insertLast(int value) {
+        if(isFull()) return false;
+        r=(r+1)%capacity;        //for wraping around (circular behaviour)
+        cd[r]=value;
+        size++;
+        return true;
+    }
+    bool deleteFront() {
+        if(isEmpty()) return false;
+        f=(f+1)%capacity;             //for wraping around (circular behaviour)
+        size--;
+        return true;
+    } 
+    bool deleteLast() {
+        if(isEmpty()) return false;
+        r=(r-1+capacity)%capacity;      //for wraping around (circular behaviour)
+        size--;
+        return true;
+    }
+    int getFront() {
+        if(isEmpty()) return -1;
+        return cd[f];
+    }
+    int getRear() {
+        if(isEmpty()) return -1;
+        return cd[r];
+    }
+    bool isEmpty() {
+        return size==0;
+    }
+    bool isFull() {
+        return size==capacity;
+    }
+};
+*/
+//optimal solution using STL deque
+class MyCircularDeque {
+    deque<int>cd;
+    int size;
+public:
+    MyCircularDeque(int k) {
+        size=k;
+    }
+    
+    bool insertFront(int value) {
+        if(cd.size()==size) return false;
+        cd.push_front(value);
+        return true;
+
+    }
+    
+    bool insertLast(int value) {
+        if(cd.size()==size) return false;
+        cd.push_back(value);
+        return true;
+    }
+    
+    bool deleteFront() {
+        if(cd.empty()) return false;
+        cd.pop_front();
+        return true;
+    }
+    
+    bool deleteLast() {
+        if(cd.empty()) return false;
+        cd.pop_back();
+        return true;
+    }
+    
+    int getFront() {
+        if(cd.empty()) return -1;
+        return cd.front();
+    }
+    
+    int getRear() {
+        if(cd.empty()) return -1;
+        return cd.back();
+    }
+    
+    bool isEmpty() {
+        return cd.empty();
+    }
+    
+    bool isFull() {
+        return size==cd.size();
+    }
+};
+
+/**
+ * Your MyCircularDeque object will be instantiated and called as such:
+ * MyCircularDeque* obj = new MyCircularDeque(k);
+ * bool param_1 = obj->insertFront(value);
+ * bool param_2 = obj->insertLast(value);
+ * bool param_3 = obj->deleteFront();
+ * bool param_4 = obj->deleteLast();
+ * int param_5 = obj->getFront();
+ * int param_6 = obj->getRear();
+ * bool param_7 = obj->isEmpty();
+ * bool param_8 = obj->isFull();
+ */
 
 
+
+
+
+
+// 1701. Average Waiting Time
+// Input: customers = [[1,2],[2,5],[4,3]]
+// Output: 5.00000
+// Explanation:
+// 1) The first customer arrives at time 1, the chef takes his order and starts preparing it immediately at time 1, and finishes at time 3, so the waiting time of the first customer is 3 - 1 = 2.
+// 2) The second customer arrives at time 2, the chef takes his order and starts preparing it at time 3, and finishes at time 8, so the waiting time of the second customer is 8 - 2 = 6.
+// 3) The third customer arrives at time 4, the chef takes his order and starts preparing it at time 8, and finishes at time 11, so the waiting time of the third customer is 11 - 4 = 7.
+// So the average waiting time = (2 + 6 + 7) / 3 = 5.
+
+class Solution {
+public:
+    double averageWaitingTime(vector<vector<int>>& customers) {
+        long long t=0;
+        long long total=0;
+        for(auto c:customers){
+            int a=c[0];   //arrival time
+            int b=c[1];   //cook time
+            if(t<a) t=a;   //if the current time < arrival make the time as arrival
+    
+            t+=b;        //add cook time to current time
+            total+=(t-a);    //calculate wating time by current time -arrial time)
+        }
+        double avg=(double) total/customers.size();
+        return avg;
+    }
+};
 
