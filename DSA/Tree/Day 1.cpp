@@ -125,13 +125,13 @@ int main(){
     if(root==NULL) cout<<"Failed creation"<<endl;
     else{
         cout<<"Inorder Traversal: ";
-        inorder(root);
+        inorder(root);                 //D B E A C F
         cout<<endl;
         cout<<"Preorder Traversal: ";
-        preorder(root);
+        preorder(root);                //A B D E C F
         cout<<endl;
         cout<<"Postorder Traversal: ";
-        postorder(root);        
+        postorder(root);               //D E B F C A        
     }
 
 }
@@ -150,6 +150,69 @@ int main(){
 
 // Even though recursion creates many nodes, only one node — the very first one — is returned to root in main().
 // Node* root = create();  // stores the pointer to the first node only
+
+
+
+
+
+
+//Level Order Insertion 
+#include<iostream>
+#include<queue>
+using namespace std;
+
+struct Node{
+    char data;
+    Node *left;
+    Node *right;
+};
+
+Node *create(){   
+    cout<<"Enter value: ";
+    char val;
+    cin>>val;
+    if(val == 'X') return NULL;   
+    else{
+        Node* newnode= new Node;   //creating a new node
+        newnode-> data=val;
+        newnode->left=create();   // recursively creating left subtree
+        newnode->right=create();  // recursively creating right subtree
+        return newnode; 
+    }
+}
+
+void levelOrder(Node *root){
+    if(root==NULL) return;
+
+    queue<Node*> q;
+
+    q.push(root);  //pushing the root node into the queue
+
+    while(!q.empty()){   //till the queue is not empty
+        Node *curr=q.front();  //store front node
+        q.pop();     //pop the front node from the queue
+
+        cout<<curr->data<<" ";    //print the data of curr(front)
+        if(curr->left!=NULL){
+            q.push(curr->left);   //push left child
+        }
+        if(curr->right!=NULL){
+            q.push(curr->right);  //push right child
+        }
+    }
+}
+
+int main(){
+    Node *root=NULL;
+    root=create();  //creating the tree and storing the root pointer
+    cout<<"Level Order Traversal: ";
+    levelOrder(root);
+    cout<<endl;
+    return 0;
+}
+
+// Input: A B C D E X X F X X X XX
+// Level Order Traversal: A B C D E F 
 
 
 
