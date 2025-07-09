@@ -449,3 +449,99 @@ int main(){
 
 
 
+//Deleting nodes having value more than average in BST
+#include<iostream>
+using namespace std;
+
+struct Node{
+    int data;
+    Node* left;
+    Node *right;
+};
+
+Node *create(int num){
+    Node *newnode=new Node();
+    newnode->data=num;
+    newnode->left=newnode->right=NULL;
+
+    return newnode;
+}
+
+Node *insert(Node *root,int num){
+    if(root==NULL) return create(num);
+    if(num<root->data) root->left=insert(root->left,num);
+    else if(num>root->data) root->right=insert(root->right,num);
+
+    return root;
+}
+
+int sumNodes(Node *root){   //find sum of nodes
+    if(root==NULL) return 0;
+    return root->data + sumNodes(root->left) + sumNodes(root->right);
+
+}
+
+int countNode(Node *root){   //find total no. of nodes
+    if (root==NULL) return 0;
+    return countNode(root->right) + countNode(root->left) +1;   
+    
+}
+
+Node *delNodeGreaterThanAvg(Node *root,int avg){
+    if(root==NULL) return root;
+    root->left=delNodeGreaterThanAvg(root->left, avg);
+    root->right=delNodeGreaterThanAvg(root->right, avg);
+    if(root->data > avg){    //if root's value is greater than average(delete it)
+        if(root->left==NULL){     //if left child is null return the right and delete node
+            Node* temp=root->right;
+            delete root;
+            return temp;
+        }
+        else if(root->right==NULL){    //if right child is null return the left and delete node
+            Node* temp=root->right;
+            delete root;
+            return temp;
+        }
+
+        //if root has both left and right child (find inorder successor)
+        Node *temp=root->right;   //go to right subtree
+        while(temp!=NULL && temp->left!=NULL){   //find the left most node(smallest)
+            temp=temp->left;
+        }
+
+        root->data=temp->data;  //replace root's data with temp's data
+        root->right=delNodeGreaterThanAvg(root->right, temp->data);   //delete temp's data from right subtree
+    }
+    return root;
+}
+
+void inorder(Node *root){
+    if(root==NULL) return;
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+}
+
+int main(){
+    Node *root=NULL;
+
+    int n;
+    cout<<"Enter elements (-1 to stop): ";
+    while(true){
+        cin>>n;
+        if(n==-1) break;
+        root=insert(root,n);
+    }
+
+    cout<<"Inorder traversal: ";
+    inorder(root); 
+
+    int avg = sumNodes(root)/countNode(root);
+    root=delNodeGreaterThanAvg(root,avg);
+
+    cout<<"Inorder traversal: ";
+    inorder(root);    
+    return 0;
+}
+
+
