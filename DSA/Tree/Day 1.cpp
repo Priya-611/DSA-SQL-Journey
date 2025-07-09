@@ -211,11 +211,86 @@ int main(){
     return 0;
 }
 
-// Input: A B C D E X X F X X X XX
+// Input: A B C D E X X F X X X X X
 // Level Order Traversal: A B C D E F 
 
 
 
+
+
+
+// Building Binary Tree using Array input
+
+// For 0 based indexing:
+// left child would be at 2*i+1
+// right child would be at 2*i+2
+
+#include<iostream>
+#include<queue>
+using namespace std;
+
+struct Node{
+    char data;
+    Node *left;
+    Node *right;
+
+    Node(char val){
+        data=val;
+        left=right=NULL;
+    }
+};
+
+Node *buildFromArray(vector<char>&v, int i){
+    if(i>=v.size() || v[i]=='X') return NULL;
+
+    Node *root=new Node(v[i]);
+    root->left=buildFromArray(v , 2*i+1); 
+    root->right=buildFromArray(v , 2*i+2);
+    return root;
+}
+
+void levelOrder(Node *root){
+    if(root==NULL) return;
+
+    queue<Node*> q;
+
+    q.push(root);  //pushing the root node into the queue
+
+    while(!q.empty()){   //till the queue is not empty
+        Node *curr=q.front();  //store front node
+        q.pop();     //pop the front node from the queue
+
+        cout<<curr->data<<" ";    //print the data of curr(front)
+        if(curr->left!=NULL){
+            q.push(curr->left);   //push left child
+        }
+        if(curr->right!=NULL){
+            q.push(curr->right);  //push right child
+        }
+    }
+}
+
+int main(){
+    int n;
+    cout<<"Enter no. of nodes: ";
+    cin>>n;
+
+    vector<char> arr(n);
+    cout<<"Enter characters: ";
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int i=0;
+    Node *root=buildFromArray(arr,i); //pass array and index as 0 
+    cout<<"Level Order Traversal: ";
+    levelOrder(root);  //printing level order traversal
+    cout<<endl;
+    return 0;
+}
+
+
+//  A B C D X E F X X X X X X
+// Level Order Traversal: A B C D E F 
 
 
 
