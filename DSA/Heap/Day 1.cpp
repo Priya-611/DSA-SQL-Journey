@@ -207,8 +207,84 @@ Steps:
 
 
 //Insertion 
-// Way 1:
+//Way 1:   [ Insertion Method (Repeated Insert) ]
 
+//MAX HEAP 
+#include<iostream>
+using namespace std;
+
+int idx=0;
+void insert_heap(int a[],int num){
+    a[idx]=num;
+    int po=idx;  //po will check the current index
+    while(po>0 && a[po]> a[(po-1)/2]){  //comparing element with its parent [if it is greater than it's parent, swap it and shift to it's parent to check it]
+        swap(a[po],a[(po-1)/2]);
+        po=(po-1)/2;   //make po as its parent till po > 0
+    }
+    idx++;
+}
+
+int main(){
+    int n,num;
+    cout<<"Enter the size of array: ";
+    cin>>n;
+    int a[n];
+    cout<<"Enter elements: ";
+    for(int i=0;i<n;i++){
+        cin>>num;
+        insert_heap(a,num);  // forming heap tree while inserting 
+    }
+    cout<<"Elements in Heap are: ";
+    for(int i=0;i<n;i++){
+        cout<<a[i]<<" ";
+    }
+}
+
+
+
+
+
+//MIN HEAP  [only change the condition in while loop]
+#include<iostream>
+using namespace std;
+
+int idx=0;
+void insert_heap(int a[],int num){
+    a[idx]=num;
+    int po=idx;  //po will check the current index
+    while(po>0 && a[po] < a[(po-1)/2]){  //comparing element with its parent [if it is smaller than it's parent, swap it and shift to it's parent to check it]
+        swap(a[po],a[(po-1)/2]);
+        po=(po-1)/2;   //make po as its parent till po > 0
+    }
+    idx++;
+}
+
+int main(){
+    int n,num;
+    cout<<"Enter the size of array: ";
+    cin>>n;
+    int a[n];
+    cout<<"Enter elements: ";
+    for(int i=0;i<n;i++){
+        cin>>num;
+        insert_heap(a,num);  // forming heap tree while inserting 
+    }
+    cout<<"Elements in Heap are: ";
+    for(int i=0;i<n;i++){
+        cout<<a[i]<<" ";
+    }
+}
+
+/*insert_heap()  ->  as the num is inserted, insert it in the array and check if that num is greater(smaller) than its parent, 
+if yes, then swap them and go and check if it's(parent's) parent is greater(smaller) thann it(parent)*/
+
+
+
+
+
+//Way 2:   [ Heapify / Build-Heap Method (Bottom‑Up) ]
+
+//MAX HEAP
 
 
 
