@@ -285,10 +285,77 @@ if yes, then swap them and go and check if it's(parent's) parent is greater(smal
 //Way 2:   [ Heapify / Build-Heap Method (Bottom‑Up) ]
 
 //MAX HEAP
+#include<iostream>
+using namespace std;
+void heapify(int a[], int n, int idx){
+    int larIdx=idx;
+    int l=2*idx+1;   //get the left child 
+    int r=2*idx+2;   //get the right child
+    if(l<n && a[l] > a[larIdx]) larIdx=l;    // if left child is greater than larIdx , change larIdx value
+    if(r<n && a[r] > a[larIdx]) larIdx=r;    // if right child is greater than larIdx , change larIdx value
+    
+    if(larIdx!=idx){   //if larIdx value has changed now
+        swap(a[larIdx],a[idx]);   //swap the value
+        heapify(a,n,larIdx);    //heapify the current tree
+    }
+}
+void build_heap(int a[], int n){
+
+    for(int k=(n/2)-1;k>=0;k--){ //loop will extract only parent element [ex-> for 9 elements value of k will be 3,2,1,0 ]
+        heapify(a,n,k);  //everytime pass a tree [k is the parent element]
+    }
+}
+
+int main(){
+    int n;
+    cout<<"Enter the size of array: ";
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++) cin>>a[i];
+
+    build_heap(a,n);
+
+    for(int i=0;i<n;i++) cout<<a[i]<<" ";
+    
+}
 
 
 
 
+//MIN HEAP [only change the condition inside the 'if' inside heapify function ]
+#include<iostream>
+using namespace std;
+void heapify(int a[], int n, int idx){
+    int larIdx=idx;
+    int l=2*idx+1;   //get the left child 
+    int r=2*idx+2;   //get the right child
+    if(l<n && a[l] < a[larIdx]) larIdx=l;    // if left child is greater than larIdx , change larIdx value
+    if(r<n && a[r] < a[larIdx]) larIdx=r;    // if right child is greater than larIdx , change larIdx value
+    
+    if(larIdx!=idx){   //if larIdx value has changed now
+        swap(a[larIdx],a[idx]);   //swap the value
+        heapify(a,n,larIdx);    //heapify the current tree
+    }
+}
+void build_heap(int a[], int n){
+
+    for(int k=(n/2)-1;k>=0;k--){ //loop will extract only parent element [ex-> for 9 elements value of k will be 3,2,1,0 ]
+        heapify(a,n,k);  //everytime pass a tree [k is the parent element]
+    }
+}
+
+int main(){
+    int n;
+    cout<<"Enter the size of array: ";
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++) cin>>a[i];
+
+    build_heap(a,n);
+
+    for(int i=0;i<n;i++) cout<<a[i]<<" ";
+    
+}
 
 
 
