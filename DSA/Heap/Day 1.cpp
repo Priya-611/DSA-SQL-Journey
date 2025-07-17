@@ -311,10 +311,11 @@ int main(){
     cout<<"Enter the size of array: ";
     cin>>n;
     int a[n];
+    cout<<"Enter elements: ";
     for(int i=0;i<n;i++) cin>>a[i];
 
     build_heap(a,n);
-
+    cout<<"Max Heap elements are: ";
     for(int i=0;i<n;i++) cout<<a[i]<<" ";
     
 }
@@ -349,13 +350,33 @@ int main(){
     cout<<"Enter the size of array: ";
     cin>>n;
     int a[n];
+    cout<<"Enter elements: ";
     for(int i=0;i<n;i++) cin>>a[i];
 
     build_heap(a,n);
-
+        
+    cout<<"Min Heap elements are: ";
     for(int i=0;i<n;i++) cout<<a[i]<<" ";
     
 }
 
+/*
+build_heap() -> amoun all the elements it would only take parent element and pass in heapify function
+[to know who are the parents in overall array just find (n/2)-1 and from there to 0th index all elements are parent of some other elements]
 
+
+heapify() -> consider parent (idx/k) as largest(smallest) and then compare with its left and right child and 
+swap whosoever if currently largest(smallest) amoung them and 
+then recursively heapify all elments after that [the new tree elements]
+
+
+
+heapify() and build_heap() only ensure the heap property:
+In a max‑heap: every parent ≥ its children.
+In a min‑heap: every parent ≤ its children.
+
+- This does NOT mean the whole array is in sorted order.
+It just means if you interpret that array as a binary tree, it satisfies the heap property.
+
+*/
 
