@@ -45,6 +45,18 @@
 
 ---
 
+## **S\_Day4.cpp**
+**Topic:** Stack-based Problem Solving
+**Learning Outcomes:**
+
+* **Remove Outermost Parentheses (LeetCode 1021)** using depth tracking.
+* **Crawler Log Folder (LeetCode 1598)** using stack to simulate folder movement.
+* **Maximum Nesting Depth of Parentheses (LeetCode 1614)**.
+* **Online Stock Span (LeetCode 901)** using stack of pairs.
+* **Evaluate Reverse Polish Notation (LeetCode 150)** using stack to compute expressions.
+
+---
+
 ## **Q\_Day5.cpp**
 
 **Topic:** Queue Data Structure
