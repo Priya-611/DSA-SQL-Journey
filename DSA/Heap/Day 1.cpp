@@ -327,15 +327,15 @@ int main(){
 #include<iostream>
 using namespace std;
 void heapify(int a[], int n, int idx){
-    int larIdx=idx;
+    int smallIdx=idx;
     int l=2*idx+1;   //get the left child 
     int r=2*idx+2;   //get the right child
-    if(l<n && a[l] < a[larIdx]) larIdx=l;    // if left child is greater than larIdx , change larIdx value
-    if(r<n && a[r] < a[larIdx]) larIdx=r;    // if right child is greater than larIdx , change larIdx value
+    if(l<n && a[l] < a[smallIdx]) smallIdx=l;    // if left child is smaller than smallIdx , change smallIdx value
+    if(r<n && a[r] < a[smallIdx) smallIdx=r;    // if right child is smaller than smallIdx , change smallIdx value
     
-    if(larIdx!=idx){   //if larIdx value has changed now
-        swap(a[larIdx],a[idx]);   //swap the value
-        heapify(a,n,larIdx);    //heapify the current tree
+    if(smallIdx!=idx){   //if smallIdx value has changed now
+        swap(a[smallIdx],a[idx]);   //swap the value
+        heapify(a,n,smallIdx);    //heapify the current tree
     }
 }
 void build_heap(int a[], int n){
