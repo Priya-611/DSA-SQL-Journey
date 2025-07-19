@@ -232,6 +232,102 @@ Also check the current node’s value is greater than both children’s values. 
 
 
 
+//Decrease‑Key (or Increase‑Key) in a Heap
+#include<iostream>
+using namespace std;
+
+void heapify(int a[],int n,int idx){ //heapify(top-down approach) [kepp swapping if large value is found]
+    int larIdx=idx;
+    int l=2*idx+1;
+    int r=2*idx+2;
+
+    if(l<n && a[l] > a[larIdx]) larIdx=l;
+    if(r<n && a[r] > a[larIdx]) larIdx=r;
+
+    if(larIdx!=idx){
+        swap(a[idx],a[larIdx]);
+        heapify(a,n,larIdx);
+    }
+
+}
+
+void insertHeap(int a[], int &n, int value){ //insert at idx and then bubble-up[bottom-up approach]
+    a[n]=value;  
+    int i=n;
+    n++;
+
+    while(i>0 && a[i]> a[(i-1)/2]){
+        swap(a[i],a[(i-1)/2]);
+        i=(i-1)/2;
+    }
+}
+
+void increaseKey(int a[], int idx, int val){  //change value at idx and then bubble-up
+    a[idx]=val;
+    //bubble-up
+    while(idx>0 && a[idx]> a[(idx-1)/2]){
+        swap(a[idx],a[(idx-1)/2]);
+        idx=(idx-1)/2;
+    }
+
+}
+
+void decreaseKey(int a[],int n, int idx, int val){ //change value at idx an then heapify [top down]
+    a[idx]=val;
+
+    heapify(a,n,idx); 
+}
+
+void displayHeap(int a[],int n){
+    for(int i=0;i<n;i++){
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
+}
+
+int main(){
+    int a[100];
+    int n=0;
+
+    insertHeap(a,n,10);
+    insertHeap(a,n,20);
+    insertHeap(a,n,15);
+    insertHeap(a,n,40);
+    insertHeap(a,n,50);
+
+    cout<<"Elements in Max Heap after insertion: ";
+    displayHeap(a,n);
+
+    cout<<"Increase key at index 2 to 55\n";
+    increaseKey(a,2,55);
+    cout<<"Heap after 1st change: ";
+    displayHeap(a,n);
+
+
+    cout<<"Decrease key at index 0 to 8\n";
+    decreaseKey(a,n,0,8);
+
+    cout<<"Heap after deletion: ";
+    displayHeap(a,n);
+
+}
+
+/*
+insertHeap() ->  will insert the value at position and check if it's parent is smaller then child (current) ,swap then 
+and increase n(size)
+
+
+heapify() -> perform heapify operation i.e it will keep checking if any children hold greater value , if so swap them
+
+
+increasekey() -> change the value at given index and bubble-up [i.e. keep checking the parent and swap accordingly]
+
+
+decrease key() -> change the value at given index and heapify 
+
+
+displayHeap() ->  will display current array elements
+*/
 
 
 
@@ -239,4 +335,65 @@ Also check the current node’s value is greater than both children’s values. 
 
 
 
+//Kth-largest value
+#include<iostream>
+#include<vector>
+#include<queue>
+using namespace std;
+
+int findKthLargest(vector<int> &a, int k){
+    priority_queue<int, vector<int>, greater<int>> minHeap;
+
+    for(int num: a){
+        minHeap.push(num);
+        if(minHeap.size() > k) minHeap.pop();
+    }
+    return minHeap.top();
+}
+
+int main(){
+    int n;
+    cout<<"Enter no. of elements: ";
+    cin>>n;
+    vector<int> a(n);
+    
+    cout<<"Enter elements: ";
+    for(int i=0;i<n;i++) cin>>a[i];
+    
+    int k;
+    cout<<"Enter k: ";
+    cin>>k;
+
+    cout<<k<<"th largest element is: "<<findKthLargest(a,k)<<endl;
+
+}
+
+/*finKthLargest() ->  keep pushing element from vector in minHeap [after pushing element , it will get in heap order itself]
+now keep checking size each time and if size gets bigger delete the top(smallest) , 
+now when size of vector is k  i.e.  k elements are left the top most element(now smallest) is kth largest element
+
+
+nums = [3,2,1,5,6,4], k = 2
+
+Step through:
+- Push 3 -> heap = [3]
+- Push 2 -> heap = [2,3] (min-heap root=2)
+- Push 1 -> heap = [1,3,2], size=3 > k -> pop smallest (1)
+  heap now = [2,3]
+- Push 5 -> heap = [2,3,5], size=3 > k -> pop smallest (2)
+  heap now = [3,5]
+- Push 6 -> heap = [3,5,6], size=3 > k -> pop smallest (3)
+  heap now = [5,6]
+- Push 4 -> heap = [4,6,5], size=3 > k -> pop smallest (4)
+  heap now = [5,6]
+
+Final heap = [5,6], smallest = 5
+Answer = 5
+
+*/
+
+
+
+
+/*  if i build ,maxHeap[priority_queue<int> maxHeap] with same logic it will give kth smallest element  */
 
