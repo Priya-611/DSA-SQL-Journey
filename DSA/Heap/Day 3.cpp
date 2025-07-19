@@ -93,7 +93,7 @@ and heaoify by passing first element as parent and reducing size by 1 each time 
 
 
 
-//Q) Check if this BST follow Heap property ?
+//Q) Check if this Binary Tree follow Heap property ?
 #include<iostream>
 #include<queue>
 using namespace std;
@@ -105,7 +105,7 @@ struct Node{
     Node(int val): data(val), left(NULL), right(NULL){}
 };
 
-Node* buildTree(){  
+Node* buildTree(){  //building binary tree 
     int val;
     cin>>val; //take input value
     if(val==-1) return NULL;  //-1 means no child
@@ -142,13 +142,13 @@ class Solution{
         return 1 + countNodes(root->left) + countNodes(root->right);
     }
 
-    bool isComplete(Node* root, int i, int total ){
+    bool isComplete(Node* root, int i, int total ){ //chek for completeness of binary tree
         if(root==NULL) return true; 
         if(i>=total) return false;  // [That would indicate: There’s a “gap” somewhere before in the tree,structure doesn't fil CBT]
         return isComplete(root->left, 2*i+1, total) && isComplete(root->right, 2*i+2, total);  //keep checking 
     }
 
-    bool maxHeapProperty(Node *root){ 
+    bool maxHeapProperty(Node *root){ //check if they follow max heap property
         if(root->left==NULL && root->right==NULL) return true;
         if(root->right==NULL){  //if no right child ,compare left child   [NOTE: right child should exist only if left child exists]
             return (root->data >= root->left->data);
@@ -160,7 +160,7 @@ class Solution{
         return left && right && (root->data >= root->left->data) && (root->data >= root->right->data );
     }
 
-    bool isHeap(Node* root){
+    bool isHeap(Node* root){      //initiallyfunction to be called from main
         int total=countNodes(root);
         return isComplete(root,0,total) && maxHeapProperty(root);
     }
@@ -228,5 +228,15 @@ Also check the current node’s value is greater than both children’s values. 
 
  
 */
+
+
+
+
+
+
+
+
+
+
 
 
