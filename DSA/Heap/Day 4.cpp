@@ -97,3 +97,41 @@ public:
 
 
 
+
+
+// 347. Top K Frequent Elements
+// Input: nums = [1,1,1,1,1,2,2,2,2,3], k = 2
+// Output: [1,2]
+
+/*in map , freq we'll store {1:5, 2:4, 3:1} [number:frequency]
+  in minHeap {1:3, 4:2, 5:1} (store in [frequncy:number])  ,and so elements will be arranged acc to frequency order as while pushing frequency is passed first
+  kepep deleting if sie increases than k 
+
+  while getting result push only the .second from heap which is actually .first in map i.e. number 
+*/
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        vector<int> result;
+        unordered_map<int,int> freq;
+        for(int n:nums){
+            freq[n]++;
+        }
+
+        priority_queue<pair<int,int>,vector<pair<int,int>>, greater<pair<int,int>>>minHeap;
+        //minHeap compares .first if first is equal it goes with .second [so here we store second[freq] before first[num]]
+        for(auto &p: freq){
+            minHeap.push({p.second, p.first});
+            if(minHeap.size()>k) minHeap.pop();
+        }
+      
+        while(!minHeap.empty()){
+            result.push_back(minHeap.top().second);  //and retrieve .second [which is actually the .first in map (num)]
+            minHeap.pop();
+        }
+      
+        return result;
+    }
+};
+
+
