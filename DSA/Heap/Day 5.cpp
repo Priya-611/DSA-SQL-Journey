@@ -104,8 +104,28 @@ Otherwise: return a.first > b.first;
 
 
 
+// 973. K Closest Points to Origin
+// Input: points = [[1,3],[-2,2]], k = 1
+// Output: [[-2,2]]
 
-
+/*we'll use maxHeap to get top k closet points*/
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        priority_queue<pair<int,int>> maxHeap;
+        for(int i=0;i<points.size();i++){
+            int dist=points[i][0]*points[i][0] + points[i][1]*points[i][1];   //distance = x*x + y*y
+            maxHeap.push({dist,i});  //push dist as well as ith position  [so it will get order on the basis of dist]
+            if(maxHeap.size()>k) maxHeap.pop();
+        }
+        vector<vector<int>> res;
+        while(!maxHeap.empty()){
+            res.push_back(points[maxHeap.top().second]);  //will push the position(i) [.second in max Heap] in points 
+            maxHeap.pop();
+        }
+        return res;
+    }
+};
 
 
 
