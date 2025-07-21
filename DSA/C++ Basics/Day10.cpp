@@ -224,3 +224,52 @@ public:
 };
 
 
+
+
+// 137. Single Number II
+// Input: nums = [2,2,3,2]
+// Output: 3
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        unordered_map<int,int> freq;
+        for(int n:nums){
+            freq[n]++;
+        }
+        for(auto &p:freq){
+            if(p.second==1) return p.first; 
+        }
+        return 0;
+    }
+};
+/*p.first hold number in vector nums
+p.second  hold frequency count
+*/
+
+
+
+
+
+
+
+
+// 260. Single Number III
+// Input: nums = [1,2,1,3,2,5]
+// Output: [3,5]
+// Explanation:  [5, 3] is also a valid answer.
+
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        unordered_map<int,int> freq;
+        for(int n:nums){
+            freq[n]++;
+        }
+        vector<int> v;
+        for(auto &p: freq){
+            if (p.second==1) v.push_back(p.first);
+        }
+        return v;
+    }
+};
+
