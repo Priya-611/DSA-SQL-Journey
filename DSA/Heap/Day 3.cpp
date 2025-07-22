@@ -392,8 +392,54 @@ Answer = 5
 
 */
 
-
-
-
 /*  if i build ,maxHeap[priority_queue<int> maxHeap] with same logic it will give kth smallest element  */
+
+
+
+/* in comparator parameters are passed  if (comp(parent, child)) swap();
+Comparator returns true → means the current parent/child pair violates heap order → swap them.
+Comparator returns false → heap property is fine → no swap needed.
+
+Parent = 5, Child = 10
+comp(5,10) = 5<10 = true ⇒ swap (10 bubbles up)
+
+Parent = 10, Child = 5
+comp(10,5) = 10<5 = false ⇒ no swap
+
+
+
+✅ Swapping happens when comp(parent, child) is TRUE.
+Because that means: parent has lower priority than child.
+
+*/
+
+// Example: max-heap (default comparator = less<int>)
+// Comparator: comp(a,b) = (a < b)
+
+// | parent | child | `a<b`? | What it means                                      | Swap?        |
+// | ------ | ----- | ------ | -------------------------------------------------- | ------------ |
+// | 5      | 10    | true   | parent (5) < child (10) → parent is lower priority | ✅ Swap       |
+// | 10     | 5     | false  | parent (10) < child (5)? No → parent is fine       | ❌ Don’t swap |
+
+
+// Example: min-heap (comparator = greater<int>)
+// Comparator: comp(a,b) = (a > b)
+
+// | parent | child | `a>b`? | What it means                                                     | Swap?        |
+// | ------ | ----- | ------ | ----------------------------------------------------------------- | ------------ |
+// | 5      | 10    | false  | parent (5) > child (10)? No → parent is fine                      | ❌ Don’t swap |
+// | 10     | 5     | true   | parent (10) > child (5) → parent is lower priority (for min-heap) | ✅ Swap       |
+
+
+
+
+/*
+Inbuilt operations happening
+Under the hood, it uses std::push_heap and std::pop_heap:
+push_heap → when you insert, it compares new element with parents using comparator and moves it up.
+pop_heap → when you remove, it swaps top with last, then moves new top down using comparator.
+
+You don’t see these, but STL calls them.
+*/
+
 
