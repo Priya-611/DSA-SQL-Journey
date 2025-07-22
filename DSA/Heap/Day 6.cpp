@@ -131,3 +131,79 @@ public:
         return res;
     }
 };
+
+
+
+
+
+
+// 264. Ugly Number II
+// Input: n = 10
+// Output: 12
+// Explanation: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12] is the sequence of the first 10 ugly numbers.
+    
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        priority_queue<long,vector<long>,greater<long>> minHeap;
+        unordered_set<long> seen;   //to avoid duplicates
+        //start with pushing 1 
+        minHeap.push(1);
+        seen.insert(1);
+
+        long ugly=1;  //let say the fisrt  no. is 1
+        for(int i=0;i<n;i++){    //till the loop keeps on running 
+    // ugly always stores the smallest ugly number currently available in the heap (and then you remove it).
+            ugly=minHeap.top();   //get the top of min Heap (i.e. smallest)
+            minHeap.pop();       //pop it out
+
+        //and get next three numbers whose prime factors are limited to 2, 3, and 5.
+            long n2=ugly*2;
+            long n3=ugly*3;
+            long n4=ugly*5;
+
+     //push element in heap only if they are new (i.e. insert().second returns true)    i.e. firstly insert in seen set if it gets inserted then only push in heap
+            if(seen.insert(n2).second) minHeap.push(n2);
+            if(seen.insert(n3).second) minHeap.push(n3);
+            if(seen.insert(n4).second) minHeap.push(n4);
+
+        }
+        return (int)ugly;  //convert long ino int 
+    }
+};
+/*
+| Iteration (i) | ugly (popped) | heap (after push)                         | seen (after insert)           |
+| ------------- | ------------- | ----------------------------------------- | ----------------------------- |
+|  0            | 1             | \[2,3,5]                                  | {1,2,3,5}                     |
+|  1            | 2             | \[3,4,5,6,10]                             | {1,2,3,4,5,6,10}              |
+|  2            | 3             | \[4,5,6,9,10,15]                          | {1,2,3,4,5,6,9,10,15}         |
+|  3            | 4             | \[5,6,8,9,10,15,12,20]                    | {1,2,3,4,5,6,8,9,10,12,15,20} |
+|  4            | 5             | \[6,8,9,10,15,20,12,25]                   | {…25}                         |
+|  5            | 6             | \[8,9,10,12,15,20,25,18,30]               | {…18,30}                      |
+|  6            | 8             | \[9,10,12,15,16,18,20,25,30,24,40]        | {…16,24,40}                   |
+|  7            | 9             | \[10,12,15,16,18,20,25,27,30,24,40,45]    | {…27,45}                      |
+|  8            | 10            | \[12,15,16,18,20,24,25,27,30,40,45,50]    | {…50}                         |
+|  9            | 12            | \[15,16,18,20,24,25,27,30,36,40,45,50,60] | {…36,60}                      |
+*/
+// after the loop, ugly = 12, which is the 10th ugly number.
+
+
+/*
+A set is a container that stores unique elements.
+👉 It automatically takes care of no duplicates.
+👉 You don’t need to manually check if an element already exists.
+
+std::set    Stores elements in sorted order.
+std::unordered_set      Stores elements in no particular order (hash table).
+
+*)  seen.insert()
+    What does insert() return?
+    -> pair<iterator, bool>
+That means:
+result.first → an iterator pointing to the element in the set.
+result.second → a bool telling you if insertion actually happened.
+
+whenever there's a new element(never seen before) it gets inserted and .second returns true
+whenever there's a repeated element(already existing) it do not get inserted and .second returns false
+*/
+
