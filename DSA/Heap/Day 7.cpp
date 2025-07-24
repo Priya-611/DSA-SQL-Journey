@@ -49,6 +49,87 @@ Decompose the pair into:
 
 
 
+
+
+// 378. Kth Smallest Element in a Sorted Matrix
+// Input: matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8
+// Output: 13
+// Explanation: The elements in the matrix are [1,5,9,10,11,12,13,13,15], and the 8th smallest number is 13
+
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        priority_queue<int> maxHeap;
+        for(int i=0;i<matrix.size();i++){
+            for(int j=0;j<matrix[i].size();j++){
+                maxHeap.push(matrix[i][j]);
+
+                if(maxHeap.size()>k) maxHeap.pop();
+            }
+        }
+        return maxHeap.top();
+    }
+};
+
+
+
+
+
+// 2583. Kth Largest Sum in a Binary Tree
+// Input: root = [5,8,9,2,1,3,7,4,6], k = 2
+// Output: 13
+// Explanation: The level sums are the following:
+// - Level 1: 5.
+// - Level 2: 8 + 9 = 17.
+// - Level 3: 2 + 1 + 3 + 7 = 13.
+// - Level 4: 4 + 6 = 10.
+// The 2nd largest level sum is 13.
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    long long kthLargestLevelSum(TreeNode* root, int k) {
+        if(!root) return -1;
+        priority_queue<long long,vector<long long>,greater<long long>> minHeap;
+
+        queue<TreeNode*>q;
+        q.push(root);
+      
+        while(!q.empty()){  //for calculating sum level wise
+            int size=q.size();
+            long long sum=0;
+            for(int i=0;i<size;i++){  //for loop goes on only till the soze defined earlier 
+                TreeNode* node=q.front();  //getting the first node's val and popping it out 
+                q.pop();
+                sum+=node->val;
+                if(node->left) q.push(node->left);  //push left and right children in queue
+                if(node->right) q.push(node->right);  
+            }
+            minHeap.push(sum);     //push the sum
+            if(minHeap.size()>k) minHeap.pop();   //delete the elements if exceeding the k
+        }
+      
+        if(k > minHeap.size()) return -1;    //if any where the k is greater than the level of values stored that probably means that value doesn't exist 
+        
+        return minHeap.top();
+    }
+};
+
+
+
+
+
+
 // 786. K-th Smallest Prime Fraction
 // Input: arr = [1,2,3,5], k = 3
 // Output: [2,5]
@@ -56,7 +137,7 @@ Decompose the pair into:
 // 1/5, 1/3, 2/5, 1/2, 3/5, and 2/3.
 // The third fraction is 2/5.
 
-//using brute force
+//using brute force(without heap)
 class Solution {
 public:
     vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
