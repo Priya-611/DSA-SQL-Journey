@@ -1,6 +1,6 @@
-C++ Basics: 
+## C++ Basics: 
 
-Day 1: C++ Basics & Control Flow
+### Day 1: C++ Basics & Control Flow
 - Core Syntax: iostream, namespaces, main function.
 - Variables & Operators: Declaration, arithmetic, increment/decrement.
 - Typecasting: Explicit type conversion.
@@ -8,7 +8,7 @@ Day 1: C++ Basics & Control Flow
 - Loops: for, while, do-while, and for-each loops with practical examples.
 
 
-Day 2: Operators, Functions & Arrays
+### Day 2: Operators, Functions & Arrays
 - Bitwise Operators: AND, OR, XOR, NOT, Left/Right Shift.
 - Built-in Functions: Utilized cmath for common mathematical operations.
 - Functions: Deep dive into pass by value vs. pass by reference.
@@ -16,19 +16,19 @@ Day 2: Operators, Functions & Arrays
 - Arrays: Manipulating 1D and 2D arrays, including finding min/max and calculating sums.
 
 
-Day 3: Searching, Sorting & Vectors
+### Day 3: Searching, Sorting & Vectors
 - Searching Algorithms: Implemented Linear Search and Binary Search.
 - Sorting Algorithms: Practiced Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, and Quick Sort.
 - std::vector: Explored dynamic arrays, push_back, size, capacity, insert, erase, and 2D vectors.
 - Duplicate Removal: Implemented custom logic for removing duplicates from sorted vectors.
 
 
-Day 4: Strings
+### Day 4: Strings
 - std::string: Comprehensive use of string manipulation functions like getline, append, length, substr, find, replace, insert, erase, and compare.
 - String Operations: Implemented string reversal, palindrome checks, vowel/consonant counting, duplicate character removal, and anagram detection.
 
 
-Day 5: Object-Oriented Programming (OOP) Fundamentals
+### Day 5: Object-Oriented Programming (OOP) Fundamentals
 - Classes & Objects: Defined blueprints and instances, understanding memory allocation.
 - Object Instantiation: Handled objects on both the stack and heap (new/delete).
 - Constructors: Implemented default, parameterized, and copy constructors.
@@ -36,7 +36,7 @@ Day 5: Object-Oriented Programming (OOP) Fundamentals
 - Ambiguity Resolution: Used the scope resolution operator (::) to resolve ambiguities in multiple inheritance.
 
 
-Day 6: Advanced OOP & Polymorphism
+### Day 6: Advanced OOP & Polymorphism
 - Memory Initializer List: Used for efficient member initialization in constructors.
 - Polymorphism (Compile-time):
      Method Overloading: Functions with the same name but different parameters.
@@ -52,7 +52,7 @@ Day 6: Advanced OOP & Polymorphism
 - Inline Functions: Optimized short functions for compiler inlining.
 
 
-Day 7: Number Conversions & Patterns
+### Day 7: Number Conversions & Patterns
 - Memory Allocation: Reviewed Static vs. Dynamic allocation (Stack vs. Heap, new/delete).
 - Abstract vs. Concrete Classes: Differentiated their roles and instantiation.
 - Ambiguity Resolution (Revisited): Further examples of using :: for inherited members.
@@ -68,7 +68,7 @@ Day 7: Number Conversions & Patterns
      Alphabet patterns (sequential, row-wise, and reverse).
 
 
-Day 8: LeetCode problems
+### Day 8: LeetCode problems
 - String manipulation:
      Length of Last Word (Q58)
      Valid Palindrome (Q125)
@@ -88,7 +88,7 @@ Day 8: LeetCode problems
      Sort Array by Parity (Q905) — both two-pointer and optimized versions.
 
 
-Day 9: LeetCode problems - II
+### Day 9: LeetCode problems - II
 - Sorting and selection:
      Third Maximum Number (Q414)
      Relative Sort Array (Q1122)
