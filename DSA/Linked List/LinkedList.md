@@ -1,6 +1,6 @@
-Linked List:
+## Linked List:
 
-- Day 1: Basics of Singly Linked List (SLL)
+### Day 1: Basics of Singly Linked List (SLL)
   * Introduction to Linked List: structure, advantages over arrays.
   * Types: Singly, Doubly, Circular.
   * `struct` and pointer-based dynamic memory management.
@@ -13,7 +13,7 @@ Linked List:
   * Printing a list in reverse (through logic).
 
 
-- Day 2: Insertion, Deletion & Merge in SLL
+### Day 2: Insertion, Deletion & Merge in SLL
   * Dynamic creation (with `-1` as stop signal).
   * Inserting at any position.
   * Deleting from a given position or a given value.
@@ -25,7 +25,7 @@ Linked List:
   * Edge case handling in insert/delete.
 
 
-- Day 3: Doubly Linked List (DLL)
+### Day 3: Doubly Linked List (DLL)
   * Introduction to DLL: bidirectional traversal using `prev` and `next`.
   * Creating, displaying forward and backward.
   * Insertion at any position.
@@ -36,7 +36,7 @@ Linked List:
   * `while(current!=NULL)` and `while(ptr->next!=NULL)` logic.
 
 
-- Day 4: Circular Linked Lists (SCLL & DCLL)
+### Day 4: Circular Linked Lists (SCLL & DCLL)
   * Singly & Doubly Circular LLs.
   * Tail pointing to head to form a loop.
   * SCLL: Create, Insert, Delete by position/value.
@@ -46,7 +46,7 @@ Linked List:
   * Extra attention to pointer manipulation for circular links.
 
 
-- Day 5: Deletion, Search & Sorted Insertion in DCLL
+### Day 5: Deletion, Search & Sorted Insertion in DCLL
   * Deletion by position and value in DCLL.
   * Search operation.
   * Inserting value in a sorted DCLL.
@@ -56,7 +56,7 @@ Linked List:
   * Using `start->prev` to get the tail efficiently.
 
 
-- Day 6 : LeetCode Problem-Solving on Linked Lists
+### Day 6 : LeetCode Problem-Solving on Linked Lists
   * Q206: Reverse Linked List
   * Q21: Merge Two Sorted Lists
   * Q876: Middle of LL
@@ -72,7 +72,7 @@ Linked List:
   * Real-world problems using clean modular code with `ListNode` struct.
 
 
-- Day 7 : Advanced LeetCode Linked List Problems
+### Day 7 : Advanced LeetCode Linked List Problems
   * Q2: Add Two Numbers (Optimal)
   * Q160: Intersection of Two LLs
   * Q61: Rotate List
@@ -86,7 +86,7 @@ Linked List:
   * Combination of multiple operations: reverse + merge, or detect + reposition.
 
 
-- Day 8 Overview: STL + Odd-Even LL Logic
+### Day 8 Overview: STL + Odd-Even LL Logic
   * Q328: Odd Even Linked List — segregating odd-indexed and even-indexed nodes efficiently.
 
   * STL Practice:
