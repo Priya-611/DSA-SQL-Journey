@@ -207,3 +207,43 @@ whenever there's a new element(never seen before) it gets inserted and .second r
 whenever there's a repeated element(already existing) it do not get inserted and .second returns false
 */
 
+
+
+
+
+
+/*DOESN'T WORK FOR LARGE SIZED ARRAY [TIME LIMIT EXCEEDED]*/
+
+// 373. Find K Pairs with Smallest Sums
+// Input: nums1 = [1,7,11], nums2 = [2,4,6], k = 3
+// Output: [[1,2],[1,4],[1,6]]
+// Explanation: The first 3 pairs are returned from the sequence: [1,2],[1,4],[1,6],[7,2],[7,4],[11,2],[7,6],[11,4],[11,6]
+
+class Solution {
+public:
+    vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        priority_queue<pair<int,pair<int,int>>> maxHeap;
+            for(int i=0;i<nums1.size();i++){
+            for(int j=0;j<nums2.size();j++){
+                int s=nums1[i]+nums2[j];
+                maxHeap.push({s,{nums1[i],nums2[j]}});
+
+                if(maxHeap.size()>k) maxHeap.pop();
+
+            }
+        }
+        vector<vector<int>> v;
+        // while(!maxHeap.empty()){
+        //     v.push_back({maxHeap.top().second.first,maxHeap.top().second.second});
+        //     maxHeap.pop();
+        // }
+        while(!maxHeap.empty()){
+            auto p=maxHeap.top().second;
+            v.push_back({p.first,p.second});
+            maxHeap.pop();
+        }
+        return v;
+
+    }
+};
+
