@@ -105,12 +105,12 @@ public:
         queue<TreeNode*>q;
         q.push(root);
       
-        while(!q.empty()){  //for calculating sum level wise
+        while(!q.empty()){  //for calculating sum level wise  [The while loop runs once per level]
             int size=q.size();
             long long sum=0;
             for(int i=0;i<size;i++){  //for loop goes on only till the soze defined earlier 
                 TreeNode* node=q.front();  //getting the first node's val and popping it out 
-                q.pop();
+                q.pop();  //store sum
                 sum+=node->val;
                 if(node->left) q.push(node->left);  //push left and right children in queue
                 if(node->right) q.push(node->right);  
@@ -118,7 +118,8 @@ public:
             minHeap.push(sum);     //push the sum
             if(minHeap.size()>k) minHeap.pop();   //delete the elements if exceeding the k
         }
-      
+
+      //this condition is needed only in few testcases
         if(k > minHeap.size()) return -1;    //if any where the k is greater than the level of values stored that probably means that value doesn't exist 
         
         return minHeap.top();
@@ -129,6 +130,7 @@ public:
 
 
 
+/*NO HEAP*/
 
 // 786. K-th Smallest Prime Fraction
 // Input: arr = [1,2,3,5], k = 3
@@ -167,6 +169,5 @@ inside lambda funtion:
 
 If true, a will be placed before b in the sorted vector.
 */
-
 
 
