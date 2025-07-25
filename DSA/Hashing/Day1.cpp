@@ -141,18 +141,48 @@ Example in C++:
   unordered_map (hash table) → ❌ no order guarantee.
   map (red‑black tree) → ✅ sorted order.
 
-
 */
 
 
+// # HashMap (key → value)
+//    ✅ Use when:
+//    You need to store key–value pairs.
+//    You want to count frequencies.
+//    You need to quickly get a value by key.
+//    Example problems:
+//    ✔️ Two Sum
+//    ✔️ Subarray Sum Equals K
+//    ✔️ Group Anagrams
 
+   // Creation:
+     #include <unordered_map>
+      unordered_map<string, int> hash_map;
+      hash_map["apple"] = 5;
+      hash_map["banana"] = 7;
+      cout << hash_map["apple"]; // 5
+      hash_map.erase("banana");
+ 
+      
 
+// # HashSet (unique elements only)
+//    ✅ Use when:
+//    You just care about existence, not values.   Only keys (no values)
+//    You need to check duplicates quickly.
+//    You want to store only unique elements.
+//    Example problems:
+//    ✔️ Longest Consecutive Sequence
+//    ✔️ Detect Cycle in Graph (visited set)
+//    ✔️ Check if pair with sum exists
 
-
-
-
-
-
+   // Creation:
+     #include <unordered_set>
+      unordered_set<string> hash_set;
+      hash_set.insert("apple");
+      hash_set.insert("banana");
+      if(hash_set.find("apple") != hash_set.end()) {
+          cout << "exists";
+      }
+      hash_set.erase("banana");
 
 
 
