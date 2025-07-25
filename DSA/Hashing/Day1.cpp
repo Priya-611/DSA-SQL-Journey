@@ -144,6 +144,7 @@ Example in C++:
 */
 
 
+
 // # HashMap (key → value)
 //    ✅ Use when:
 //    You need to store key–value pairs.
@@ -161,8 +162,20 @@ Example in C++:
       hash_map["banana"] = 7;
       cout << hash_map["apple"]; // 5
       hash_map.erase("banana");
- 
-      
+/*
+| Operation               | Syntax                                         | Example                                        |
+| ----------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| ✅ **Insert**          | `m[key] = value;` or `m.insert({key, value});` | `m["apple"] = 5;`                              |
+| ✅ **Access value**    | `m[key]`                                       | `cout << m["apple"];`                          |
+| ✅ **Find key**        | `m.find(key)` (returns iterator)               | `if(m.find("apple") != m.end()) { found }`     |
+| ✅ **Erase key**       | `m.erase(key);`                                | `m.erase("apple");`                            |
+| ✅ **Size**            | `m.size()`                                     | `cout << m.size();`                            |
+| ✅ **Clear all**       | `m.clear()`                                    | `m.clear();`                                   |
+| ✅ **Iterate**         | `for(auto &p : m)`                             | `cout << p.first << " " << p.second;`          |
+| ✅ **Check existence** | `m.count(key)`                                 | `if(m.count("apple")){}`                       |
+*/
+
+
 
 // # HashSet (unique elements only)
 //    ✅ Use when:
@@ -183,6 +196,124 @@ Example in C++:
           cout << "exists";
       }
       hash_set.erase("banana");
+/*
+| Operation             | Syntax             | Example                                  |
+| --------------------- | ------------------ | ---------------------------------------  |
+| ✅ **Insert**          | `s.insert(key);`   | `s.insert(10);`                         |
+| ✅ **Find key**        | `s.find(key)`      | `if(s.find(10)!=s.end()) {found}`       |
+| ✅ **Erase key**       | `s.erase(key);`    | `s.erase(10);`                          |
+| ✅ **Size**            | `s.size()`         | `cout << s.size();`                     |
+| ✅ **Clear all**       | `s.clear()`        | `s.clear();`                            |
+| ✅ **Iterate**         | `for(auto &x : s)` | `cout << x;`                            |
+| ✅ **Check existence** | `s.count(key)`     | `if(s.count(10)) { exists }`            |
+*/
+
+
+
+
+// Hash Map (unordered_map)
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+using namespace std;
+int main(){
+    vector<int> arr={2,3,4,2,4,4,1};
+    unordered_map<int,int> freq;
+
+    for(int n: arr){
+        freq[n]++;
+    }
+
+    for(auto &p: freq){
+        cout<<"Element: "<<p.first<<" has frequency: "<<p.second<<endl;
+    }
+}
+
+
+
+
+// Hash Set (unordered_set)
+#include<iostream>
+#include<vector>
+#include<unordered_set>
+using namespace std;
+int main(){
+    vector<int> arr={2,4,3,5,5,2};
+    unordered_set<int> s;
+    bool duplicate=false;
+
+    for(int n:arr){
+        if(s.find(n) != s.end()){
+            duplicate=true;
+            break;
+        }
+        s.insert(n);
+    }
+    cout<<(duplicate ? "Duplicate found " : "No duplicate found");
+}
+
+
+
+
+
+//HASHING: 
+#include<iostream>
+#include<vector>
+#include<list>
+using namespace std;
+
+const int size=10;
+// vector<vector<int>> hashTable(size);   //can use this but while removing element from middle, it will take O(n) becuase it shifts elements
+vector<list<int>> hashTable(size);   //using list so that we can use .remove()  and so each buckt holds a chain 
+
+void insert(int key){
+    int idx = key % size;
+    hashTable[idx].push_back(key);
+}
+
+bool search(int key){
+    int idx = key % size;
+    for(int a: hashTable[idx]){
+        if(a == key) return true;
+    }
+    return false;
+}
+
+void deleteItem(int key){
+    int idx = key % size;
+    hashTable[idx].remove(key);
+}
+
+void display(){
+    for(int i=0;i<size;i++){
+        cout<<i<<": ";
+        for(int a: hashTable[i]) cout<< a <<" ";
+        cout<<endl;
+    }
+}
+
+int main(){
+    insert(15);
+    insert(18);
+    insert(35);
+    insert(2);
+    insert(9);
+
+    display();
+
+    cout<<"Searching 25: "<<(search(35) ? "Found" : "not found")<<endl;
+    
+    deleteItem(2);
+    display();
+
+}
+
+/*list is a container from the C++ Standard Template Library (STL).
+ It stores elements in a doubly‑linked list internally.
+ Key properties of list:
+✅ Insertion and deletion at any position is O(1) (just relink pointers).
+✅ But random access (like list[i]) is not direct; you have to iterate.
+✅ It keeps elements in the order they were inserted.*/
 
 
 
