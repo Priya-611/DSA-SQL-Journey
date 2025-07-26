@@ -118,7 +118,7 @@ int main(){
         cin>>key;
         int idx=key % size;   //division [find index]
         if(hashTable[idx]==-1) hashTable[idx] = key;    //if space is empty --> insert
-        else{  //if not empty ---> search for next empty index
+        else{  //if not empty ---> search for next empty index   COLLISION OCCUR 
             while(hashTable[idx]!=-1){    
                 idx++;
                 if(idx==size) idx=0;    //if index reaches the end of hash table search from 0th index
@@ -131,10 +131,10 @@ int main(){
         cout<<i<<": "<<hashTable[i]<<endl;
     }
 }
-
+/* Division method(hash fucntion) is used for finding index for insertion. It works by taking the remainder when the key is divided by the table size.*/
 /*if part is when there's no collision*/
-/*else part is when collision occurs*/
-/*the while loop part is Linear Probing as we are searching for next empty space to insert new element*/
+/*else part is when collision occurs   now use linear probing */
+/*the while loop part is LINEAR PROBING as we are searching for next empty space to insert new element*/
 
 
 
@@ -142,7 +142,7 @@ int main(){
 
 
 
-// Searching and Deleting With Linear Probing using Division method
+// SEARCHING and DELETING With Linear Probing using Division method
 #include<iostream>
 using namespace std;
 const int size=10;
@@ -247,3 +247,59 @@ int main(){
   
   
   
+
+//LINEAR PROBING using MID-SQUARE METHOD
+#include<iostream>
+using namespace std;
+const int size=10;
+int hashTable[size];
+
+int main(){
+    int k,key;
+    
+    //initialisation
+    for(int i=0 ;i<size;i++){
+        hashTable[i]=-1;
+    }
+
+    cout<<"Enter the no. of elements: ";
+    cin>>k;
+
+    //insertion
+    cout<<"Enter elements: ";
+    for(int i=0 ;i<k;i++){
+        cin>>key;
+       //mid-sqaure method for finding index
+        int sq = key*key;
+        int mid = (sq/10) % 10;
+        int idx = mid%size;
+        
+        if (hashTable[idx]==-1) hashTable[idx]=key;
+        else{ //coliision occur --> linear probing
+            int start=idx;
+            while(hashTable[idx]!=-1){
+                idx=(idx+1)%size;
+                if (idx==start){
+                    cout<<"table full!!";
+                    break;
+                }
+            }
+            if(hashTable[idx] == -1) hashTable[idx]=key;
+        }
+    }
+
+    cout<<"Hash Table is: "<<endl;
+    for(int i=0;i<size;i++){
+        cout<<i<<": ";
+        if (hashTable[i] == -1) cout << "empty"<<endl;
+        else cout << hashTable[i]<<endl;
+    }
+
+}
+/*Mid-Squre Method is used for finding index(hash value) from a key so that the keys are spread out more evenly in a hash table.
+take key --> sqaure it --> find some mid portion --> take modulo with table size   */
+/*if part is when there's no collision*/
+/*else part is when collision occurs   now use linear probing */
+/*the while loop part is LINEAR PROBING as we are searching for next empty space to insert new element*/
+
+
