@@ -55,6 +55,51 @@ Ex: Table size = 5, elements = 5 → load factor = 1 (too full!)
   
 // When you use built‑in containers like unordered_map or unordered_set in C++… they already handle load factor & 
 // automatically rehash (increase bucket count) when load factor crosses a threshold (usually 0.75).
+
+
+
+
+// Backend of built-in hashing( unordered_map / unordered_set )
+/*
+unordered_map<int,string> m;
+m[5] = "apple";
+
+Buckets: internally keeps an array of buckets (like vector<list<pair<K,V>>>).
+Hash function: automatically provided (e.g., std::hash<int>).
+Load factor: it tracks how full the table is.
+Rehashing: when load factor > 0.75, it automatically doubles bucket size and moves elements.
+Collision handling: uses SEPARATE CHAINING (list per bucket).
+
+Each bucket is a chain (usually a linked list or sometimes a tree for very high collisions).
+*/
+
+
+
+// Backend of manual hashing
+/*
+vector<list<int>> hashTable(size);
+
+Think of the vector as the array of buckets. Each element of that vector is a list<int>, which represents a chain for that bucket.
+
+Buckets: you create an array (vector) of chains (list<int> or vector<int>).
+Hash function: you design, e.g. idx = key % size.
+Load factor: you have to calculate (elements / buckets) manually.
+Rehashing: you have to write code to create a new bigger table and move elements.
+Collision handling: you choose method:
+  - Separate chaining (list per bucket)
+  - Open addressing (linear probing, etc.)
+  
+*/
+
+
+
+
+
+
+
+
+
+
   
   
   
