@@ -97,7 +97,150 @@ Collision handling: you choose method:
 
 
 
+// LINEAR PROBING using DIVISION method
+#include<iostream>
+using namespace std;
+const int size=10;
+int hashTable[size];
 
+int main(){
+    int k,key;
+    
+    for(int i=0 ;i<size;i++){
+        hashTable[i]={-1};
+    }
+
+    cout<<"Enter the no. of elements: ";
+    cin>>k;
+
+    cout<<"Enter elements: ";
+    for(int i=0 ;i<k;i++){
+        cin>>key;
+        int idx=key % size;   //division [find index]
+        if(hashTable[idx]==-1) hashTable[idx] = key;    //if space is empty --> insert
+        else{  //if not empty ---> search for next empty index
+            while(hashTable[idx]!=-1){    
+                idx++;
+                if(idx==size) idx=0;    //if index reaches the end of hash table search from 0th index
+            }
+            hashTable[idx] = key;
+        }
+    }
+    cout<<"Hash Table is: "<<endl;
+    for(int i=0;i<size;i++){
+        cout<<i<<": "<<hashTable[i]<<endl;
+    }
+}
+
+/*if part is when there's no collision*/
+/*else part is when collision occurs*/
+/*the while loop part is Linear Probing as we are searching for next empty space to insert new element*/
+
+
+
+
+
+
+
+// Searching and Deleting With Linear Probing using Division method
+#include<iostream>
+using namespace std;
+const int size=10;
+int hashTable[size];
+
+void insert(int key){
+    int idx=key % size;   //division [find index]
+    int start=idx;
+
+    if(hashTable[idx]==-1 || hashTable[idx]==-2) hashTable[idx] = key;    //if space is empty --> insert
+        
+    else{  //if not empty ---> search for next empty index
+        while(hashTable[idx]!=-1 && hashTable[idx]!=-2){    
+            idx=(idx+1)%size;  //wraping the idx
+            if(idx==start){   //all indexes are traversed
+                cout<<"Table is full !! cannot insert";
+                return;                   
+            }
+        }
+        hashTable[idx] = key;
+    }
+}
+
+int search(int key){
+    int idx=key%size;
+    int start=idx;
+
+    while(hashTable[idx]!=-1){
+        if(hashTable[idx]==key) return idx;
+        idx=(idx+1)%size;
+        if (idx==start) break;  //all indexes are traversed
+    }
+    return -1;
+}
+
+
+bool deleteKey(int key){
+    int idx=key%size;
+    int start=idx;
+
+    while(hashTable[idx]!=1){
+        if(hashTable[idx]==key){
+            hashTable[idx]=-2;   //indicating deleted
+            return true;
+        }
+        idx=(idx+1)%size;
+        if (idx==start) break;  //all indexes are traversed
+    } 
+    return false;
+}
+
+void display(){
+    cout<<"Hash Table is: "<<endl;
+    for(int i=0;i<size;i++){
+        cout<<i<<": ";
+        if(hashTable[i]==-1) cout<<"empty"<<endl;
+        else if(hashTable[i]==-2) cout<<"deleted"<<endl;
+        else cout<<hashTable[i]<<endl;
+    }
+}
+
+int main(){
+    int k,key;
+    
+    //initialisation
+    for(int i=0 ;i<size;i++){
+        hashTable[i]=-1;
+    }
+
+    cout<<"Enter the no. of elements: ";
+    cin>>k;
+
+    //insertion
+    cout<<"Enter elements: ";
+    for(int i=0 ;i<k;i++){
+        cin>>key;
+        insert(key);
+    }
+    display();
+
+
+    //searching
+    cout<<"\nEnter a key to search: ";
+    cin>>key;
+    int j=search(key);
+    if(j==-1) cout<<key<<" not found"<<endl; 
+    else cout<<key<<" found at index: "<<j<<endl;
+
+
+    //deletion
+    cout<<"Enter a key to delete: ";
+    cin>>key;
+    cout<<(deleteKey(key)? "key deleted":" key not found, cannot delete");
+
+
+    display();
+
+}
 
 
   
