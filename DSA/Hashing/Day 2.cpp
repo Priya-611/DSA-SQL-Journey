@@ -94,8 +94,8 @@ Collision handling: you choose method:
 
 
 
-
-
+// For COLLISION handling we'll use Linear Probing and Quadratic Probing
+// Division method and Mid-Sqaure method are one of the ways to define a hash fucntion [a way to store values in hash table]
 
 // LINEAR PROBING using DIVISION method
 #include<iostream>
@@ -133,7 +133,7 @@ int main(){
 }
 /* Division method(hash fucntion) is used for finding index for insertion. It works by taking the remainder when the key is divided by the table size.*/
 /*if part is when there's no collision*/
-/*else part is when collision occurs   now use linear probing */
+/*else part is when collision occurs now use linear probing */
 /*the while loop part is LINEAR PROBING as we are searching for next empty space to insert new element*/
 
 
@@ -301,5 +301,14 @@ take key --> sqaure it --> find some mid portion --> take modulo with table size
 /*if part is when there's no collision*/
 /*else part is when collision occurs   now use linear probing */
 /*the while loop part is LINEAR PROBING as we are searching for next empty space to insert new element*/
+
+
+
+
+
+
+
+
+
 
 
