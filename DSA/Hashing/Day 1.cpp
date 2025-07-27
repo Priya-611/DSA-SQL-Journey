@@ -317,3 +317,145 @@ int main(){
 
 
 
+
+
+
+//Hashing using Linked List
+#include<iostream>
+using namespace std;
+
+const int size=10;  //size of hash table
+
+struct Node{   //Node for storing eaxh key at bucket
+    int data;
+    Node *next;
+    Node(int val){
+        data=val;
+        next=NULL;
+    }
+};
+
+Node *hashTable[size]; //Making hashTable of defined size
+
+int hashFunction(int key){   //finding index
+    return key%size;
+}
+
+void insert(int key){
+    int idx=hashFunction(key);    //find index
+    Node *newnode= new Node(key);   //make memory for key 
+    newnode->next=hashTable[idx];   //store the value at hashTable in next of node [NULL will stored in starting]
+    hashTable[idx]=newnode;         //and now store  the node(key) at that index in hashTable
+}
+
+int search(int key){
+    int idx=hashFunction(key);
+    Node *temp=hashTable[idx];
+    while(temp!=NULL){
+        if(temp->data==key) return idx;
+        temp=temp->next;
+    }
+    return -1;
+
+}
+
+void deleteKey(int key){
+    int idx= hashFunction(key);
+    Node* temp=hashTable[idx];
+    Node *prev=NULL;  //maintaining a previous pointer
+
+    while(temp!=NULL){
+        if(temp->data == key){
+            if(prev==NULL){
+                hashTable[idx]=temp->next;
+            }
+            else{
+                prev->next=temp->next;
+            }
+            delete temp;
+            cout<<"Deleted "<<key<<endl;
+            return;
+        }
+        prev=temp;
+        temp=temp->next;
+    }
+    cout<<key<<" not found"<<endl;
+}
+
+void display(){
+    cout<<"Hash Table is: \n";
+
+    for(int i=0;i<size;i++){
+        cout<<i<<": ";
+        Node *temp=hashTable[i];
+        while(temp!=NULL){
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+        cout<<"NULL"<<endl;
+    }
+}
+
+
+int main(){
+    //initialisation
+    for(int i=0;i<size;i++) hashTable[i]=NULL;
+
+    //insertion 
+    insert(17);
+    insert(34);
+    insert(3);
+    insert(22);
+    insert(47);
+    insert(88);
+    insert(92);
+
+//  (index 2) ---> Node(92) ---> Node(22) ---> NULL
+
+    display();
+
+    //searching
+    int i=search(22);
+    if(i==-1) cout<<"key not found "<<endl;
+    else cout<<"key found at "<<i<<endl;
+
+    //deletion
+    deleteKey(17);
+
+    //display
+    display();
+
+}
+
+/*
+HashTable (array of heads):
++-----+-----+-----+-----+-----+-----+-----+-----+-----+----+
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9 | 
++-----+-----+--|--+--|--+--|--+-----+-----+--|--+--|--+----+
+               |     |     |                 |     |
+               v     v     v                 v     v
+              [92]  [3]   [34]              [47]  [88]
+               |     |     |                 |     |
+               v     v     v                 v     v
+              [22]   NULL  NULL             [17]   NULL
+               |                             | 
+               v                             v
+              NULL                          NULL
+*/
+
+
+/*Linked List in each bucket handles collision | dynamic size per bucket | Each node points to next node (next)*/
+
+/* For insertion:
+In bucket 2:
+hashTable[2] stores the pointer to the first node.
+
+Each node has a next pointer linking to the next node.
+
+Last node’s next is NULL
+*/
+
+/*for searching: go to that index and traverse all the nodes at that index */
+
+/*for deletion: just relink the next pointer*/
+
