@@ -28,7 +28,7 @@ int main(){
     }
 
     int k,key;
-    cout<<"Enter the no. of size: ";
+    cout<<"Enter the no. of elements: ";
     cin>>k;
 
     cout<<"Enter Elements: ";
@@ -125,7 +125,7 @@ int main(){
     }
 
     int k,key;
-    cout<<"Enter the no. of size: ";
+    cout<<"Enter the no. of elements: ";
     cin>>k;
 
     //insertion
@@ -154,6 +154,168 @@ int main(){
     display(); 
 }
 
+
+
+
+
+
+
+// QUADRATIC PROBING using MID-SQUARE METHOD
+#include<iostream>
+using namespace std;
+
+const int size=10;
+int hashTable[size];
+
+int main(){
+    int k,key;
+
+    //initialisatin
+    for(int i=0;i<size;i++) {
+        hashTable[i]=-1;
+    }
+
+    cout<<"Enter the no.of elements: ";
+    cin>>k;
+
+    //insertion
+    cout<<"Enter elements: ";
+    for(int i=0;i<k;i++){
+        cin>>key;
+        
+        //mid-square for finding index
+        int sq=key*key;
+        int mid=(sq/10)%10;
+        int idx=mid%size;
+
+        if(hashTable[idx]==-1) hashTable[idx]=key;
+        else{  //use quadratic probing if collision occur
+            int i=1;
+            int h=idx;
+            while(i<size){
+                idx=(h+i*i)%size;
+                if(hashTable[idx]==-1){
+                    hashTable[idx]=key;
+                    break;
+                }
+                i++;
+            }
+            if(i==size) cout<<"Hash table is full!! cannot insert";
+        }
+
+    }
+
+    //display
+    cout<<"Hash Table is: "<<endl;
+    for(int i=0;i<size;i++){
+        cout<<i<<": ";
+        if(hashTable[i]==-1) cout<<"Empty"<<endl;
+        else cout<<hashTable[i]<<endl;
+    }
+
+}
+
+
+
+
+
+
+
+// SEARCHING and DELETING using Quadratic Probing with Mid Square Method
+#include<iostream>
+using namespace std;
+
+const int size=10;
+int hashTable[size];
+
+int midSquareIndex(int key){
+    int sq=key*key;
+    int mid=(sq/10)%10;
+    return mid%size;
+}
+
+void insert(int key){
+    int idx=midSquareIndex(key);
+    if(hashTable[idx]==-1 || hashTable[idx]==-2) hashTable[idx]=key;
+    else{
+        int i=1;
+        int h=idx;
+        while(i<size){
+            idx = (h + i*i)%size;
+            if(hashTable[idx]==-1 || hashTable[idx]==-2){
+                hashTable[idx]=key;
+                return;
+            }
+            i++;
+        }
+    }        
+}
+
+int search(int key){
+    int idx=midSquareIndex(key);
+    int h=idx;
+    int i=1;
+    while(hashTable[idx]!=-2 && hashTable[idx]!=-1 && i<size){
+        if(hashTable[idx]==key) return idx;
+        idx=(h+i*i)%size;
+        i++;
+    }
+    return -1;
+    
+}
+
+bool deleteKey(int key){
+    int pos=search(key);
+    if(pos==-1) return false;
+    hashTable[pos]=-2;
+    return true;
+}
+
+void display(){
+   cout<<"Hash Table is: "<<endl;
+    for(int i=0;i<size;i++){
+        cout<<i<<": ";
+        if(hashTable[i]==-1) cout<<"empty"<<endl;
+        else if(hashTable[i]==-2) cout<<"deleted"<<endl;
+        else cout<<hashTable[i]<<endl;
+    }
+}
+int main(){
+
+    //initialisation
+    for(int i=0;i<size;i++){
+        hashTable[i]=-1;
+    }
+
+    int k,key;
+    cout<<"Enter the no. of size: ";
+    cin>>k;
+
+    //insertion
+    cout<<"Enter Elements: ";
+    for(int i=0;i<k;i++){
+        cin>>key;
+        insert(key);
+    }
+
+    display();
+
+    //Searching
+    cout<<"Enter a element to search: ";
+    cin>>key;
+
+    int pos=search(key);
+    if(pos==-1) cout<<key<<" not found"<<endl;
+    else cout<<key<<" found at index : "<<pos<<endl;
+
+    //Deletion
+    cout<<"Enter element to delete: ";
+    cin>>key;
+    cout<<((deleteKey(key))?"deleted": "key not found ");
+
+    //display
+    display();
+}
 
 
 
