@@ -97,6 +97,7 @@ Collision handling: you choose method:
 // For COLLISION handling we'll use Linear Probing and Quadratic Probing
 // Division method and Mid-Sqaure method are one of the ways to define a hash fucntion [a way to store values in hash table]
 
+//“open addressing”   |   “closed hashing” 
 // LINEAR PROBING using DIVISION method
 #include<iostream>
 using namespace std;
