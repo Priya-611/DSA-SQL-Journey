@@ -12,7 +12,6 @@ And probing becomes:
 (h1 + i * h2(key)) % size
 
 
-
 EX:
 Let’s say:
 size = 10
@@ -36,8 +35,54 @@ Let’s insert the key 27 into the hash table.
 ...
 Keep trying until you find an empty slot.
 
+*/
 
 
+// Rules for choosing prime value
+/*
+1. prime < size         
+      [ prime number must be smaller than the table size ]
+      Ex: if size =10 , a good prime number is 7 (since 7<10)
 
+2. it should be an actual prime number
+
+3. 'prime' should be "relatively prime" to the 'size'     
+      [ the GCD of prime and size must be 1 (means they don't share any common factor except 1) ]
+      If h2(key) is not relatively prime to size, you might never probe all slots in the table — some slots will never be visited, leading to infinite loops or missed insertions.
+      If your table size is prime itself (e.g., 11), you can just choose prime = size - 1.
 
 */
+
+
+//Why to use Double Hashing
+/*
+1. Avoids Clustering (Better Distribution)
+    Linear probing causes primary clustering — elements group together in long blocks.
+    Quadratic probing reduces this a bit but still has secondary clustering.
+    Double hashing uses a second hash function to "jump" in a custom way, greatly reducing clustering.
+
+2. More Uniform Probing
+    Double hashing spreads elements more uniformly across the table than linear/quadratic probing.
+
+3. Better Performance under High Load Factor
+    As the table fills, linear/quadratic probing take longer to find free spots.
+    Double hashing still performs well because its probing path is more diverse.
+
+| You’re trying to open a series of locked doors (slots):                             |
+| ----------------------------------------------------------------------------------- |
+| **Linear probing** walks door-to-door. 🏃‍♀️ (1 step at a time)                     |
+| **Quadratic probing** hops in a fixed pattern. 🐇 (1², 2²...)                       |
+| **Double hashing** teleports using a secret formula. 🔐 (random jumps based on key) |
+
+*/
+
+
+
+
+
+
+
+
+
+
+
