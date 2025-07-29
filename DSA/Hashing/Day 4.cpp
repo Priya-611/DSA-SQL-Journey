@@ -79,10 +79,117 @@ Keep trying until you find an empty slot.
 
 
 
+#include<iostream>
+using namespace std;
+
+const int size=10;
+int hashTable[size];
+int prime=7;
+
+int index(int key){
+    return key % size;
+}
+
+int step(int key){
+    return prime - (key % prime);
+}
+
+void insert(int key){
+    int h1=index(key);
+    int h2=step(key);
+    for(int i=0;i<size;i++){   ///using loop and starting with 0, so that initialially when i=0 , index = h1 % size i.e. key % size 
+        int idx =( h1 + i*h2) % size;
+        if(hashTable[idx]==-1 || hashTable[idx]==-2){
+            hashTable[idx]=key;
+            return ;
+        }
+    }
+}
+
+int search(int key){
+    int h1=index(key);
+    int h2=step(key);
+
+    for(int i=0;i<size;i++){
+        int idx=( h1 + i*h2) %size;
+
+        if(hashTable[idx]==-1) return -1; //if it's -1 at that pos , that element is not present ,no need traverse more
+        if(hashTable[idx] == key) return idx;
+    }
+
+    return -1;
+}
+
+bool deleteKey(int key){
+    int pos=search(key);
+    if(pos==-1) return false;
+    hashTable[pos]=-2;
+
+    return true;
+}
+
+void display(){
+    cout<<"HashTable is: "<<endl;
+    for(int i=0;i<size;i++){
+        cout<<i<<": ";
+        if(hashTable[i]==-1) cout<<"empty"<<endl;
+        else if(hashTable[i]==-2) cout<<"deleted"<<endl;
+        else cout<< hashTable[i]<<endl;
+    }
+}
+
+int main(){
+    //initialisation
+    for(int i=0;i<size;i++) hashTable[i]=-1;
+
+    int k,key;
+    cout<<"Enter no. of elements: ";
+    cin>>k;
+
+    //insertion
+    cout<<"Enter elements: ";
+    for(int i=0;i<k;i++){
+        cin>>key;
+        insert(key);
+    }
+
+    display();
+
+    //searching
+    cout<<"Enter element to search: ";
+    cin>>key;
+    int pos=search(key);
+    if(pos==-1) cout<<key<<" not found "<<endl;
+    else cout<<key <<" found at index: "<<pos<<endl;
+
+    //Deletion
+    cout<<"Enter element to delete: ";
+    cin>>key;
+    cout<<((deleteKey(key)? "deleted": "key not found"))<<endl;
+
+    //displaying
+    display();
+
+}
+
+/*in insert() and search():
+ inside the for loop we are starting with 0 to size
+▶ What happens step-by-step:
+First Try (i = 0):
+    Calculates index as idx = (h1 + 0 * h2) % size = h1 % size
+    This is the primary index (first position to try).
+If occupied (collision):
+    i increases (i = 1, 2, …), so we try new indices using i * h2.
+    Each new idx = (h1 + i * h2) % size gives a different slot.
+    This reduces clustering compared to linear or quadratic probing.
+Stops when:
+    It finds an empty (-1) or deleted (-2) slot → inserts key.
 
 
-
-
+▶ similary, in search() also we start for loop with 0 to size , 
+    such that initially it search for the primary index i.e. key % size ,and 
+    if not found it increase i value and search for next index
+*/
 
 
 
