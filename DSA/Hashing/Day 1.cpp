@@ -256,7 +256,13 @@ int main(){
 
 
 
-//HASHING: 
+//SEPARATE CHAINING :  “closed addressing”   |   “open hashing” 
+/*Chaining is a collision resolution technique where each index of the hash table points to a linked list (or vector) of all the elements that hash to the same index.
+Instead of storing a single value at that index, you store a list of keys (like vector<int> or list<int>).
+On collision, you just append the new key to the list at that index.
+*/
+
+// using vector and list
 #include<iostream>
 #include<vector>
 #include<list>
@@ -320,7 +326,7 @@ int main(){
 
 
 
-//Hashing using Linked List
+//CHAINING using LINKED LIST
 #include<iostream>
 using namespace std;
 
