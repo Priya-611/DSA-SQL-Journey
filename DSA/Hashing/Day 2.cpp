@@ -91,7 +91,7 @@ Collision handling: you choose method:
   
 */
 
-
+//PROBING means searching for an empty slot in the hash table when there's a collision.
 
 
 // For COLLISION handling we'll use Linear Probing and Quadratic Probing
